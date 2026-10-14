@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "ALA occurrence-record totals for the focal species; a data-coverage check, not an abundance estimate.",
+  "width": "container",
+  "height": 310,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/ala_species_counts.csv"
+  },
+  "encoding": {
+    "y": {
+      "field": "species",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x"
+    },
+    "x": {
+      "field": "record_count",
+      "type": "quantitative",
+      "title": "ALA occurrence records"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "color": "#CBD5E1"
+      },
+      "encoding": {
+        "x2": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 160
+      },
+      "encoding": {
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Humpback whale",
+              "Indo-Pacific bottlenose dolphin",
+              "Green turtle",
+              "Grey nurse shark",
+              "Australian sea lion"
+            ],
+            "range": [
+              "#2A6FDB",
+              "#00A6A6",
+              "#55A868",
+              "#F28E2B",
+              "#8E63CE"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "record_count",
+            "title": "Occurrence records",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A",
+      "gridColor": "#E2E8F0"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

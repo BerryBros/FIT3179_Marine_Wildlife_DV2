@@ -1,0 +1,15 @@
+group,behaviour,feature_count
+Dolphin,Foraging,10
+Dolphin,Migration,1
+Dolphin,Reproduction,24
+Seal,Foraging,14
+Shark,Foraging,15
+Shark,Migration,15
+Shark,Reproduction,6
+Turtle,Foraging,382
+Turtle,Migration,1
+Turtle,Reproduction,85
+Turtle,Resting,1
+Whale,Migration,18
+Whale,Reproduction,3
+Whale,Resting,5

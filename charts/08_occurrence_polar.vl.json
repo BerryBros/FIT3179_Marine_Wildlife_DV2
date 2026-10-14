@@ -1,0 +1,165 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Radial monthly occurrence profile.",
+  "width": "container",
+  "height": 410,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/ala_monthly.csv"
+  },
+  "params": [
+    {
+      "name": "monthSpecies",
+      "value": "Humpback whale",
+      "bind": {
+        "input": "select",
+        "name": "Species: ",
+        "options": [
+          "Humpback whale",
+          "Indo-Pacific bottlenose dolphin",
+          "Green turtle",
+          "Grey nurse shark",
+          "Australian sea lion"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.species === monthSpecies"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 48,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {
+          "field": "month_num",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "radius": {
+          "field": "record_count",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "zero": true
+          },
+          "title": "ALA records"
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Humpback whale",
+              "Indo-Pacific bottlenose dolphin",
+              "Green turtle",
+              "Grey nurse shark",
+              "Australian sea lion"
+            ],
+            "range": [
+              "#4F7CAC",
+              "#42B7B0",
+              "#6DB56D",
+              "#D98B3A",
+              "#9B75CF"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "month",
+            "title": "Month"
+          },
+          {
+            "field": "record_count",
+            "title": "Occurrence records",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 187,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#334155"
+      },
+      "encoding": {
+        "theta": {
+          "field": "month_num",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "text": {
+          "field": "month"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333",
+      "gridColor": "#DCE7EA"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

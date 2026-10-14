@@ -1,0 +1,21 @@
+id,parent,group,behaviour,value
+Marine wildlife,,,,
+Dolphin,Marine wildlife,Dolphin,,
+Dolphin — Foraging,Dolphin,Dolphin,Foraging,10
+Dolphin — Migration,Dolphin,Dolphin,Migration,1
+Dolphin — Reproduction,Dolphin,Dolphin,Reproduction,24
+Seal,Marine wildlife,Seal,,
+Seal — Foraging,Seal,Seal,Foraging,14
+Shark,Marine wildlife,Shark,,
+Shark — Foraging,Shark,Shark,Foraging,15
+Shark — Migration,Shark,Shark,Migration,15
+Shark — Reproduction,Shark,Shark,Reproduction,6
+Turtle,Marine wildlife,Turtle,,
+Turtle — Foraging,Turtle,Turtle,Foraging,382
+Turtle — Migration,Turtle,Turtle,Migration,1
+Turtle — Reproduction,Turtle,Turtle,Reproduction,85
+Turtle — Resting,Turtle,Turtle,Resting,1
+Whale,Marine wildlife,Whale,,
+Whale — Migration,Whale,Whale,Migration,18
+Whale — Reproduction,Whale,Whale,Reproduction,3
+Whale — Resting,Whale,Whale,Resting,5

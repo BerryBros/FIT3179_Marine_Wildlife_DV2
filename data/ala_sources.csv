@@ -1,0 +1,6 @@
+species,scientific_name,zip_file,doi,raw_rows,cleaned_rows
+Humpback whale,Megaptera novaeangliae,humpback_whale.zip,https://doi.org/10.26197/ala.0cd90600-a825-428c-a72d-1ce2e1d2056c,52417,19193
+Green turtle,Chelonia mydas,green_turtle.zip,https://doi.org/10.26197/ala.6b191fa8-2468-49bd-b711-1f0f09a8ad16,130675,125760
+Grey nurse shark,Carcharias taurus,grey_nurse_shark.zip,https://doi.org/10.26197/ala.7be29035-09fd-4965-9221-a3a0a9f39734,2320461,108
+Australian sea lion,Neophoca cinerea,australian_sea_lion.zip,https://doi.org/10.26197/ala.a6eccc16-da5e-43c7-a288-5efc467efa48,87993,78962
+Indo-Pacific bottlenose dolphin,Tursiops aduncus,bottlenose_dolphin.zip,https://doi.org/10.26197/ala.c4fe6a50-be72-4907-ae96-db7246663232,5586,2366

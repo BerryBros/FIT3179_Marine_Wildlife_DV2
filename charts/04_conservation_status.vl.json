@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "EPBC threatened status of focal marine wildlife.",
+  "width": "container",
+  "height": 300,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/conservation_status.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "status_rank": "number"
+      }
+    }
+  },
+  "encoding": {
+    "y": {
+      "field": "display_species",
+      "type": "nominal",
+      "sort": [
+        "Grey nurse shark (east coast population)",
+        "Australian sea lion",
+        "Green turtle",
+        "Humpback whale",
+        "Indo-Pacific bottlenose dolphin"
+      ],
+      "title": null,
+      "axis": {
+        "labelLimit": 230
+      }
+    },
+    "x": {
+      "field": "status_rank",
+      "type": "quantitative",
+      "title": "EPBC threatened category",
+      "scale": {
+        "domain": [
+          -0.1,
+          3.1
+        ]
+      },
+      "axis": {
+        "values": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "labelExpr": "datum.value == 0 ? 'Not threatened' : datum.value == 1 ? 'Vulnerable' : datum.value == 2 ? 'Endangered' : 'Critically endangered'",
+        "labelAngle": 0,
+        "grid": true
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 240,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "color": {
+          "field": "status",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Not EPBC threatened",
+              "Vulnerable",
+              "Endangered",
+              "Critically Endangered"
+            ],
+            "range": [
+              "#8EA3AD",
+              "#D7A84E",
+              "#E67A55",
+              "#B94A5A"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "display_species",
+            "title": "Species / population"
+          },
+          {
+            "field": "status",
+            "title": "EPBC threatened status"
+          },
+          {
+            "field": "listing_note",
+            "title": "Context"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 13,
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#405363"
+      },
+      "encoding": {
+        "text": {
+          "field": "status"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333",
+      "gridColor": "#DCE7EA"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333"
+    }
+  }
+}

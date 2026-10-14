@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Share of total mapped Commonwealth marine-park area in each IUCN zone category, by marine-park network.",
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/park_zone_areas.csv"
+  },
+  "mark": {
+    "type": "bar"
+  },
+  "encoding": {
+    "y": {
+      "field": "network",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x"
+    },
+    "x": {
+      "aggregate": "sum",
+      "field": "area_km2",
+      "type": "quantitative",
+      "stack": "normalize",
+      "title": "Share of mapped marine-park area",
+      "axis": {
+        "format": ".0%"
+      }
+    },
+    "color": {
+      "field": "iucn_zone",
+      "type": "nominal",
+      "title": "IUCN zone category",
+      "scale": {
+        "scheme": "blues"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "network",
+        "title": "Network"
+      },
+      {
+        "field": "iucn_zone",
+        "title": "IUCN zone"
+      },
+      {
+        "aggregate": "sum",
+        "field": "area_km2",
+        "title": "Area (km\u00b2)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A",
+      "gridColor": "#E2E8F0"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

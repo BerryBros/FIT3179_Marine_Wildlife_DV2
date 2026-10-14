@@ -1,0 +1,5 @@
+dataset,owner,url,use,note
+Atlas of Living Australia occurrence records,Atlas of Living Australia,https://www.ala.org.au/,"Occurrence point map, state richness, monthly record patterns, record counts",DOIs for the five ALA downloads are saved automatically in data/ala_sources.csv.
+Biologically Important Areas for protected marine species,DCCEEW,https://gis.environment.gov.au/gispub/rest/services/marine/BiologicallyImportantAreas/MapServer,"Behaviour polygons, behaviour heatmap, treemap and habitat/protection overlay",BIAs identify areas important for behaviours; they are not full species ranges.
+Australian Marine Parks,DCCEEW / Parks Australia,https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/Australian_Marine_Parks/FeatureServer/0,"Marine park zoning, network metrics and protected-area overlay",Commonwealth marine parks; not all State/Territory marine protected areas.
+ASGS Edition 4 State and Territory boundaries (2026),Australian Bureau of Statistics,https://geo.abs.gov.au/arcgis/rest/services/ASGS2026/STE/MapServer,Australia basemap and state choropleth,Generalised layer preferred for an Australia-wide web map.

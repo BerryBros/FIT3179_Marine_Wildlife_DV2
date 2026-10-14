@@ -1,0 +1,166 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "BIA behaviour polygons.",
+  "width": "container",
+  "height": 500,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0,
+      0
+    ]
+  },
+  "params": [
+    {
+      "name": "biaSpecies",
+      "value": "Humpback whale",
+      "bind": {
+        "input": "select",
+        "name": "Species: ",
+        "options": [
+          "Humpback whale",
+          "Indo-Pacific bottlenose dolphin",
+          "Green turtle",
+          "Grey nurse shark",
+          "Australian sea lion"
+        ]
+      }
+    },
+    {
+      "name": "biaBehaviour",
+      "value": "All behaviours",
+      "bind": {
+        "input": "select",
+        "name": "Behaviour: ",
+        "options": [
+          "All behaviours",
+          "Migration",
+          "Reproduction",
+          "Foraging",
+          "Resting"
+        ]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://vega.github.io/vega-datasets/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.id == 36"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F4EFE4",
+        "stroke": "#536B77",
+        "strokeWidth": 1.0
+      }
+    },
+    {
+      "data": {
+        "url": "data/bia_selected_vega.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.species === biaSpecies"
+        },
+        {
+          "filter": "biaBehaviour === 'All behaviours' || datum.properties.behaviour === biaBehaviour"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fillOpacity": 0.3,
+        "stroke": "#173842",
+        "strokeOpacity": 0.65,
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.behaviour",
+          "type": "nominal",
+          "title": "Why the area matters",
+          "scale": {
+            "domain": [
+              "Migration",
+              "Reproduction",
+              "Foraging",
+              "Resting"
+            ],
+            "range": [
+              "#3B82F6",
+              "#E76F9A",
+              "#2A9D8F",
+              "#8B5CF6"
+            ]
+          },
+          "legend": {
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.species",
+            "title": "Species"
+          },
+          {
+            "field": "properties.behaviour",
+            "title": "Behaviour"
+          },
+          {
+            "field": "properties.location",
+            "title": "Location"
+          },
+          {
+            "field": "properties.season",
+            "title": "Season"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null,
+      "fill": "#EAF6FB"
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333",
+      "gridColor": "#DCE7EA"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Queensland Shark Control Program: total animals caught and share recorded deceased at capture.",
+  "width": "container",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/shark_control_yearly.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.status === 'Deceased' ? datum.number_caught : 0",
+      "as": "deceased_component"
+    }
+  ],
+  "vconcat": [
+    {
+      "height": 210,
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "number_caught",
+              "as": "total_caught"
+            }
+          ],
+          "groupby": [
+            "year"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3,
+        "color": "#4C93A2"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labels": false,
+            "ticks": false
+          }
+        },
+        "y": {
+          "field": "total_caught",
+          "type": "quantitative",
+          "title": "Animals caught"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "total_caught",
+            "title": "Total caught",
+            "format": ","
+          }
+        ]
+      },
+      "width": 760
+    },
+    {
+      "height": 130,
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "number_caught",
+              "as": "total_caught"
+            },
+            {
+              "op": "sum",
+              "field": "deceased_component",
+              "as": "deceased_count"
+            }
+          ],
+          "groupby": [
+            "year"
+          ]
+        },
+        {
+          "calculate": "datum.total_caught > 0 ? datum.deceased_count / datum.total_caught : 0",
+          "as": "deceased_share"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 2.6,
+            "color": "#B95757"
+          }
+        },
+        {
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 55,
+            "color": "#B95757"
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "deceased_share",
+          "type": "quantitative",
+          "title": "Share recorded deceased",
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+          "axis": {
+            "format": ".0%"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "deceased_count",
+            "title": "Recorded deceased",
+            "format": ","
+          },
+          {
+            "field": "total_caught",
+            "title": "Total caught",
+            "format": ","
+          },
+          {
+            "field": "deceased_share",
+            "title": "Deceased share",
+            "format": ".1%"
+          }
+        ]
+      },
+      "width": 760
+    }
+  ],
+  "spacing": 8,
+  "resolve": {
+    "scale": {
+      "x": "shared"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333",
+      "gridColor": "#DCE7EA"
+    }
+  }
+}

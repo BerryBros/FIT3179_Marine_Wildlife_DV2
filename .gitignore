@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Large raw datasets
+raw/
+
+# Temporary development/helper files
+apply_v5_yearly_trend.py
+apply_v4_visibility_fix.py
+fix_states_for_vega.py
+FIXES.md
+README_FIX.txt
+setup_revised_site.ps1

@@ -1,0 +1,61 @@
+species,group,month_num,month,record_count
+Humpback whale,Whale,1,Jan,25
+Humpback whale,Whale,2,Feb,11
+Humpback whale,Whale,3,Mar,22
+Humpback whale,Whale,4,Apr,19
+Humpback whale,Whale,5,May,158
+Humpback whale,Whale,6,Jun,1671
+Humpback whale,Whale,7,Jul,2701
+Humpback whale,Whale,8,Aug,4917
+Humpback whale,Whale,9,Sep,4622
+Humpback whale,Whale,10,Oct,3604
+Humpback whale,Whale,11,Nov,1238
+Humpback whale,Whale,12,Dec,191
+Green turtle,Turtle,1,Jan,8936
+Green turtle,Turtle,2,Feb,8367
+Green turtle,Turtle,3,Mar,11111
+Green turtle,Turtle,4,Apr,14272
+Green turtle,Turtle,5,May,18340
+Green turtle,Turtle,6,Jun,13854
+Green turtle,Turtle,7,Jul,8855
+Green turtle,Turtle,8,Aug,7708
+Green turtle,Turtle,9,Sep,6989
+Green turtle,Turtle,10,Oct,7563
+Green turtle,Turtle,11,Nov,9649
+Green turtle,Turtle,12,Dec,10115
+Grey nurse shark,Shark,1,Jan,12
+Grey nurse shark,Shark,2,Feb,8
+Grey nurse shark,Shark,3,Mar,13
+Grey nurse shark,Shark,4,Apr,18
+Grey nurse shark,Shark,5,May,7
+Grey nurse shark,Shark,6,Jun,1
+Grey nurse shark,Shark,7,Jul,3
+Grey nurse shark,Shark,8,Aug,7
+Grey nurse shark,Shark,9,Sep,6
+Grey nurse shark,Shark,10,Oct,12
+Grey nurse shark,Shark,11,Nov,9
+Grey nurse shark,Shark,12,Dec,12
+Australian sea lion,Seal,1,Jan,10388
+Australian sea lion,Seal,2,Feb,9772
+Australian sea lion,Seal,3,Mar,12426
+Australian sea lion,Seal,4,Apr,12439
+Australian sea lion,Seal,5,May,9440
+Australian sea lion,Seal,6,Jun,8921
+Australian sea lion,Seal,7,Jul,3071
+Australian sea lion,Seal,8,Aug,3145
+Australian sea lion,Seal,9,Sep,452
+Australian sea lion,Seal,10,Oct,115
+Australian sea lion,Seal,11,Nov,250
+Australian sea lion,Seal,12,Dec,8543
+Indo-Pacific bottlenose dolphin,Dolphin,1,Jan,168
+Indo-Pacific bottlenose dolphin,Dolphin,2,Feb,134
+Indo-Pacific bottlenose dolphin,Dolphin,3,Mar,151
+Indo-Pacific bottlenose dolphin,Dolphin,4,Apr,146
+Indo-Pacific bottlenose dolphin,Dolphin,5,May,175
+Indo-Pacific bottlenose dolphin,Dolphin,6,Jun,246
+Indo-Pacific bottlenose dolphin,Dolphin,7,Jul,324
+Indo-Pacific bottlenose dolphin,Dolphin,8,Aug,235
+Indo-Pacific bottlenose dolphin,Dolphin,9,Sep,232
+Indo-Pacific bottlenose dolphin,Dolphin,10,Oct,207
+Indo-Pacific bottlenose dolphin,Dolphin,11,Nov,187
+Indo-Pacific bottlenose dolphin,Dolphin,12,Dec,160

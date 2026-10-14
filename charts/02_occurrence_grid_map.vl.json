@@ -1,0 +1,125 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Aggregated ALA occurrence concentration by two-degree cells.",
+  "width": "container",
+  "height": 420,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://vega.github.io/vega-datasets/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.id == 36"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F4EFE4",
+        "stroke": "#536B77",
+        "strokeWidth": 1.0
+      }
+    },
+    {
+      "data": {
+        "url": "data/ala_grid.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.62,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "grid_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "grid_lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "record_count",
+          "type": "quantitative",
+          "title": "ALA records in 2\u00b0 cell",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              18,
+              900
+            ]
+          }
+        },
+        "color": {
+          "field": "species_count",
+          "type": "quantitative",
+          "title": "Focal species represented",
+          "scale": {
+            "domain": [
+              1,
+              5
+            ],
+            "scheme": "tealblues"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "record_count",
+            "title": "ALA records",
+            "format": ","
+          },
+          {
+            "field": "species_count",
+            "title": "Focal species",
+            "format": ".0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null,
+      "fill": "#EAF6FB"
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333",
+      "gridColor": "#DCE7EA"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#405363",
+      "titleColor": "#102333"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+species,group,behaviour,feature_count
+Australian sea lion,Seal,Foraging,14
+Green turtle,Turtle,Foraging,382
+Green turtle,Turtle,Migration,1
+Green turtle,Turtle,Reproduction,85
+Green turtle,Turtle,Resting,1
+Grey nurse shark,Shark,Foraging,15
+Grey nurse shark,Shark,Migration,15
+Grey nurse shark,Shark,Reproduction,6
+Humpback whale,Whale,Migration,18
+Humpback whale,Whale,Reproduction,3
+Humpback whale,Whale,Resting,5
+Indo-Pacific bottlenose dolphin,Dolphin,Foraging,10
+Indo-Pacific bottlenose dolphin,Dolphin,Migration,1
+Indo-Pacific bottlenose dolphin,Dolphin,Reproduction,24

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "BIA feature count heatmap.",
+  "width": "container",
+  "height": 300,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/bia_summary.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "behaviour",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Migration",
+        "Reproduction",
+        "Foraging",
+        "Resting"
+      ],
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "species",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Humpback whale",
+        "Indo-Pacific bottlenose dolphin",
+        "Green turtle",
+        "Grey nurse shark",
+        "Australian sea lion"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 4
+      },
+      "encoding": {
+        "color": {
+          "field": "feature_count",
+          "type": "quantitative",
+          "title": "BIA polygons",
+          "scale": {
+            "scheme": "tealblues"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "behaviour",
+            "title": "Behaviour"
+          },
+          {
+            "field": "feature_count",
+            "title": "BIA polygons",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "feature_count",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.feature_count > 120",
+            "value": "white"
+          },
+          "value": "#17313A"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A",
+      "gridColor": "#E2E8F0"
+    },
+    "legend": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope",
+      "labelColor": "#334155",
+      "titleColor": "#0F172A"
+    },
+    "header": {
+      "labelFont": "Manrope",
+      "titleFont": "Manrope"
+    }
+  }
+}

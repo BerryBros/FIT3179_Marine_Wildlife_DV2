@@ -1,0 +1,41 @@
+network,metric,metric_order,value_normalised,actual,unit
+Coral Sea,Total protected area,1,1.0,989836.0454415003,km²
+Heard Island and McDonald Islands,Total protected area,1,0.2681247222284164,380654.89896099997,km²
+Indian Ocean Territories,Total protected area,1,0.7047345111877706,744069.89586144,km²
+North,Total protected area,1,0.0,157479.54293012,km²
+North-west,Total protected area,1,0.2136842885888649,335341.05002158,km²
+South-east,Total protected area,1,0.6541040153132776,701927.2733949301,km²
+South-west,Total protected area,1,0.42156374823745973,508370.86999864,km²
+Temperate East,Total protected area,1,0.27134926696118655,383338.86973696004,km²
+Coral Sea,Number of parks,2,0.0,1.0,parks
+Heard Island and McDonald Islands,Number of parks,2,0.0,1.0,parks
+Indian Ocean Territories,Number of parks,2,0.07692307692307693,2.0,parks
+North,Number of parks,2,0.5384615384615384,8.0,parks
+North-west,Number of parks,2,0.9230769230769231,13.0,parks
+South-east,Number of parks,2,1.0,14.0,parks
+South-west,Number of parks,2,1.0,14.0,parks
+Temperate East,Number of parks,2,0.5384615384615384,8.0,parks
+Coral Sea,Number of zone types,3,0.4,4.0,zones
+Heard Island and McDonald Islands,Number of zone types,3,0.2,3.0,zones
+Indian Ocean Territories,Number of zone types,3,0.0,2.0,zones
+North,Number of zone types,3,0.6,5.0,zones
+North-west,Number of zone types,3,0.8,6.0,zones
+South-east,Number of zone types,3,1.0,7.0,zones
+South-west,Number of zone types,3,0.8,6.0,zones
+Temperate East,Number of zone types,3,1.0,7.0,zones
+Coral Sea,IUCN II share,4,0.20509345204471266,24.084773528923737,%
+Heard Island and McDonald Islands,IUCN II share,4,0.3384790373006918,36.7097614875559,%
+Indian Ocean Territories,IUCN II share,4,1.0,99.32293046255319,%
+North,IUCN II share,4,0.0,4.672613230719892,%
+North-west,IUCN II share,4,0.11541730377035621,15.596897646626978,%
+South-east,IUCN II share,4,0.7802980376269866,78.52807002749117,%
+South-west,IUCN II share,4,0.17353682911642335,21.097929157995807,%
+Temperate East,IUCN II share,4,0.11337747780338893,15.403827471755791,%
+Coral Sea,IUCN VI share,5,0.08271669185203814,6.716303340283745,%
+Heard Island and McDonald Islands,IUCN VI share,5,0.0,0.0,%
+Indian Ocean Territories,IUCN VI share,5,0.0,0.0,%
+North,IUCN VI share,5,1.0,81.19646941753577,%
+North-west,IUCN VI share,5,0.841156964098964,68.29897571080876,%
+South-east,IUCN VI share,5,0.07969974519352534,6.471337923191473,%
+South-west,IUCN VI share,5,0.6744897052366996,54.76618272369439,%
+Temperate East,IUCN VI share,5,0.16274017897572612,13.213927965206844,%
