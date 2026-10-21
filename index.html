@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Oceans in Motion: an interactive Vega/Vega-Lite story about Australia's marine wildlife, conservation threats, seasonality and marine protection." />
+  <!--<meta name="description" content="Oceans in Motion: an interactive Vega/Vega-Lite story about Australia's marine wildlife, conservation threats, seasonality and marine protection." />-->
   <title>Oceans in Motion — Australia's Marine Wildlife</title>
 
+  <!-- For fonts, and for compatibility with the existing main.js, which expects a .story-nav element.-->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-
+  <!-- For vega and vega-lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
 </head>
+
 <body>
+  <!-- Kept in the DOM so the existing main.js continues to work.
+       CSS hides these website-style navigation elements. -->
   <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
-  <nav class="story-nav" aria-label="Story sections">
+  <nav class="story-nav" aria-hidden="true">
     <a class="brand" href="#top">Oceans in Motion</a>
     <div class="story-nav__links">
       <a href="#evidence">Evidence</a>
@@ -34,291 +38,482 @@
     <div class="hero__glow hero__glow--one"></div>
     <div class="hero__glow hero__glow--two"></div>
 
-    <div class="page-width hero__grid">
-      <div>
-        <p class="eyebrow">Australia's marine wildlife</p>
-        <h1>Oceans<br><span>in Motion</span></h1>
-        <p class="hero__subtitle">A visual story of where marine animals are recorded, which pressures connect them, when evidence changes through the year, and where important habitat meets marine protection.</p>
+    <div class="page-width hero__inner">
+      <p class="eyebrow eyebrow--light">Australia's marine wildlife</p>
 
-        <div class="species-strip" aria-label="Focal species groups">
-          <span>🐋 Whales</span><span>🐬 Dolphins</span><span>🐢 Turtles</span><span>🦈 Sharks</span><span>🦭 Sea lions</span>
+      <h1>Oceans <span>in Motion</span></h1>
+
+      <p class="hero__subtitle">
+        Where marine wildlife is recorded, when observation patterns change,
+        why particular areas matter, and how those places relate to protection.
+      </p>
+
+      <div class="story-explorer">
+        <div class="story-explorer__copy">
+          <p class="story-explorer__label">Follow one species</p>
+          <p>
+            Choose a species once to update the occurrence map, BIA map,
+            seasonal charts and protection overlay.
+          </p>
         </div>
 
-        <div class="story-explorer">
-          <div>
-            <p class="story-explorer__label">Follow one species through the story</p>
-            <p>Choose a species once to update the point map, BIA map, seasonal charts and protection overlay. Local chart controls can still be used afterwards.</p>
-          </div>
-          <label>
-            <span class="sr-only">Choose a focal species</span>
-            <select id="globalSpecies">
-              <option value="">Choose a species…</option>
-              <option>Humpback whale</option>
-              <option>Indo-Pacific bottlenose dolphin</option>
-              <option>Green turtle</option>
-              <option>Grey nurse shark</option>
-              <option>Australian sea lion</option>
-            </select>
-          </label>
-        </div>
+        <label class="story-explorer__control">
+          <span class="sr-only">Choose a focal species</span>
+          <select id="globalSpecies">
+            <option value="">Choose a species…</option>
+            <option>Humpback whale</option>
+            <option>Indo-Pacific bottlenose dolphin</option>
+            <option>Green turtle</option>
+            <option>Grey nurse shark</option>
+            <option>Australian sea lion</option>
+          </select>
+        </label>
       </div>
 
-      
-    </div>
-
-    <div class="page-width hero__note">
-      <strong>Read the data carefully.</strong> ALA records are observations, not population counts. DCCEEW Biologically Important Areas identify places important for behaviours such as migration, reproduction, foraging or resting; they are not complete species ranges.
+      <div class="hero__note">
+        <strong>How to read the data.</strong>
+        ALA records are observations, not population counts. DCCEEW
+        Biologically Important Areas identify places used for behaviours such
+        as migration, reproduction, foraging or resting; they are not complete
+        species ranges.
+      </div>
     </div>
   </header>
 
   <main>
+    <!-- EVIDENCE -->
     <section class="story-section page-width" id="evidence">
       <div class="section-heading">
-        <span class="section-number">01</span>
-        <div>
-          <p class="eyebrow">Recorded evidence</p>
-          <h2>Where have marine animals been recorded?</h2>
-          <p>The first maps deliberately answer different spatial questions: individual records show locations, while proportional symbols summarise where evidence is concentrated and where more focal species are represented.</p>
-        </div>
+        <p class="eyebrow">Recorded evidence</p>
+        <h2>Where have marine animals been recorded?</h2>
+        <p>
+          Start with individual observations, then zoom out to see where the
+          evidence is concentrated and how uneven the downloaded datasets are.
+        </p>
       </div>
 
       <article class="chart-card chart-card--wide">
         <div class="chart-copy">
-
           <h3>Individual occurrence records around Australia</h3>
-          <p>Each dot is one sampled ALA occurrence record. Use the species menu to isolate one animal and reduce overlap.</p>
+          <p>
+            Each dot is one sampled ALA occurrence record. Use the species
+            control to isolate one animal and reduce overlap.
+          </p>
         </div>
+
         <div id="vis01" class="vis"></div>
-        <p class="annotation"><strong>Why this idiom?</strong> Position is the most direct channel for showing where individual observations occurred. Dense clusters may reflect observer effort as well as animal presence.</p>
+
+        <p class="annotation">
+          Dense clusters can reflect observer effort and data availability as
+          well as animal presence.
+        </p>
       </article>
 
-      <div class="two-col">
+      <div class="two-col two-col--evidence">
         <article class="chart-card">
           <div class="chart-copy">
-
             <h3>Where is observation evidence concentrated?</h3>
-            <p>Records are grouped into 2° cells. Circle size encodes record volume; colour encodes how many of the five focal species are represented.</p>
+            <p>
+              Records are grouped into 2° × 2° geographic cells. Circle size
+              shows record volume; colour shows how many focal species are
+              represented in each cell.
+            </p>
           </div>
+
           <div id="vis02" class="vis"></div>
-          <p class="annotation"><strong>New insight:</strong> a large circle means many records; a darker circle means broader focal-species representation. They are deliberately different channels.</p>
+
+          <p class="annotation">
+            Larger circles mean more records. Darker circles mean more of the
+            five focal species are represented.
+          </p>
         </article>
 
-        <article class="chart-card">
+        <article class="chart-card chart-card--compact">
           <div class="chart-copy">
-
             <h3>How uneven is the downloaded evidence?</h3>
-            <p>This checks dataset coverage before making ecological comparisons. It is not an abundance ranking.</p>
+            <p>
+              Record totals reveal differences in dataset coverage before any
+              ecological comparison is made. This is not an abundance ranking.
+            </p>
           </div>
+
           <div id="vis03" class="vis"></div>
         </article>
       </div>
     </section>
 
-    <section class="story-section story-section--risk" id="risk">
-      <div class="page-width">
+    <!-- RISK -->
+    <section class="story-band story-band--soft" id="risk">
+      <div class="page-width story-section">
         <div class="section-heading">
-          <span class="section-number">02</span>
-          <div>
-            <p class="eyebrow">Conservation risk</p>
-            <h2>Risk is not one number — and pressures are shared.</h2>
-            <p>The status ladder shows national EPBC listing level, then a network diagram reveals which documented pressures connect several focal species at once.</p>
-          </div>
+          <p class="eyebrow">Conservation risk</p>
+          <h2>Official status and documented pressures tell different stories.</h2>
+          <p>
+            EPBC listing gives a formal conservation category, while the
+            relationship view shows which broad pressures are documented
+            across several focal species.
+          </p>
         </div>
 
         <div class="two-col two-col--risk">
           <article class="chart-card">
             <div class="chart-copy">
-
               <h3>Which focal species are nationally threatened?</h3>
-              <p>The grey nurse shark marker refers specifically to the <strong>east coast population</strong>.</p>
+              <p>
+                The grey nurse shark marker refers specifically to the
+                <strong>east coast population</strong>.
+              </p>
             </div>
+
             <div id="vis04" class="vis"></div>
-            <p class="annotation"><strong>Important nuance:</strong> the west coast grey nurse shark population is listed Vulnerable, not Critically Endangered.</p>
+
+            <p class="annotation">
+              <strong>Important nuance:</strong> the west coast grey nurse
+              shark population is listed Vulnerable, not Critically Endangered.
+            </p>
           </article>
 
-          <aside class="insight-stack">
-            <div class="insight-card insight-card--critical"><span>CE</span><div><strong>Grey nurse shark — eastern population</strong><p>Critically Endangered; the current Action Plan profile gives an estimate of about 1,100 individuals.</p></div></div>
-            <div class="insight-card"><span>EN</span><div><strong>Australian sea lion</strong><p>Endangered, with ongoing risks from fisheries interactions, debris and heat-related pup mortality.</p></div></div>
-            <div class="insight-card"><span>VU</span><div><strong>Green turtle</strong><p>Vulnerable, Migratory and Marine under the EPBC Act.</p></div></div>
+          <aside class="status-guide">
+            <h3>How to read EPBC status</h3>
+            <p>
+              These are ordered legal conservation categories, not numerical
+              scores. A higher category means a higher assessed extinction risk.
+            </p>
+
+            <div class="status-guide__row">
+              <span class="status-guide__badge status-guide__badge--ce">CE</span>
+              <div>
+                <strong>Critically Endangered</strong>
+                <p>
+                  Highest threatened category shown here. The eastern grey
+                  nurse shark population is in this category.
+                </p>
+              </div>
+            </div>
+
+            <div class="status-guide__row">
+              <span class="status-guide__badge status-guide__badge--en">EN</span>
+              <div>
+                <strong>Endangered</strong>
+                <p>Australian sea lion is nationally listed as Endangered.</p>
+              </div>
+            </div>
+
+            <div class="status-guide__row">
+              <span class="status-guide__badge status-guide__badge--vu">VU</span>
+              <div>
+                <strong>Vulnerable</strong>
+                <p>Green turtle is listed as Vulnerable under the EPBC Act.</p>
+              </div>
+            </div>
+
+            <div class="status-guide__row">
+              <span class="status-guide__badge status-guide__badge--nl">—</span>
+              <div>
+                <strong>Not EPBC threatened</strong>
+                <p>
+                  This does not mean “no risk”; it means the species is not
+                  nationally listed in one of the threatened categories shown above.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              <strong>Population context:</strong> the DCCEEW Action Plan
+              profile estimates roughly 1,100 individuals for the eastern grey
+              nurse shark population.
+            </p>
           </aside>
         </div>
 
         <article class="chart-card chart-card--wide">
           <div class="chart-copy">
-
             <h3>Which pressures connect multiple species?</h3>
-            <p>Each line links a focal species to a pressure explicitly documented in the selected Australian Government sources. Hover a species or pressure to isolate its connections; larger nodes have more documented links.</p>
+            <p>
+              Each line links a focal species to a broad pressure explicitly
+              documented in the selected Australian Government sources.
+            </p>
           </div>
+
+          <div class="network-key">
+            <span><strong>Left:</strong> focal species</span>
+            <span><strong>Right:</strong> documented pressure</span>
+            <span><strong>Line:</strong> that pressure is documented for that species</span>
+            <span><strong>Number on right:</strong> how many of the five focal species share that pressure</span>
+          </div>
+
           <div id="vis05" class="vis vis--network"></div>
-          <p class="annotation"><strong>Why a network?</strong> The task is relational rather than numerical: it reveals shared pressures without implying that one threat is more severe simply because it has more links.</p>
+
+          <p class="annotation">
+            More links mean the pressure is documented for more focal species;
+            they do not measure the severity of that pressure.
+          </p>
         </article>
       </div>
     </section>
 
+    <!-- BEHAVIOUR -->
     <section class="story-section page-width" id="behaviour">
       <div class="section-heading">
-        <span class="section-number">03</span>
-        <div>
-          <p class="eyebrow">Places that matter</p>
-          <h2>Why are particular marine areas biologically important?</h2>
-          <p>Here geography and comparison are separated: the map shows where important-use areas occur, while the matrix makes species × behaviour differences easier to compare.</p>
-        </div>
+        <p class="eyebrow">Places that matter</p>
+        <h2>Why are particular marine areas biologically important?</h2>
+        <p>
+          The map locates important-use areas; the matrix compares which
+          behaviours are represented for each species.
+        </p>
       </div>
 
       <article class="chart-card chart-card--wide">
         <div class="chart-copy">
-
           <h3>Biologically Important Areas by behaviour</h3>
-          <p>Filter by species and behaviour. Colour represents why an area matters: migration, reproduction, foraging or resting.</p>
+          <p>
+            Filter by species and behaviour. Colour represents why an area
+            matters: migration, reproduction, foraging or resting.
+          </p>
         </div>
+
         <div id="vis06" class="vis"></div>
-        <p class="annotation"><strong>Map meaning:</strong> a BIA is a biologically important use area, not a complete distribution range.</p>
+
+        <p class="annotation">
+          A BIA is a biologically important use area, not a complete
+          distribution range.
+        </p>
       </article>
 
       <article class="chart-card chart-card--wide">
         <div class="chart-copy">
-
           <h3>How does the mapped behaviour profile differ between species?</h3>
-          <p>Cell intensity encodes the number of mapped BIA features for each species × behaviour combination.</p>
+          <p>
+            Cell intensity currently encodes the number of mapped BIA features
+            for each species × behaviour combination.
+          </p>
         </div>
+
         <div id="vis07" class="vis"></div>
-        <p class="annotation"><strong>Use with care:</strong> counts describe mapped BIA features, not the ecological size or importance of each behaviour.</p>
+
+        <p class="annotation">
+          Counts describe mapped BIA features, not the ecological size or
+          importance of each behaviour.
+        </p>
       </article>
     </section>
 
-    <section class="story-section story-section--time" id="time">
-      <div class="page-width">
-        <div class="section-heading">
-          <span class="section-number">04</span>
-          <div>
-            <p class="eyebrow">Seasonality</p>
-            <h2>When does the recorded evidence change through the year?</h2>
-            <p>Two different advanced idioms answer complementary questions: a radial bar emphasises the repeating annual cycle for one species, while a bump chart compares relative monthly rank across species.</p>
-          </div>
+    <!-- TIME -->
+    <section class="story-band story-band--blue" id="time">
+      <div class="page-width story-section">
+        <div class="section-heading section-heading--light">
+          <p class="eyebrow eyebrow--light">Seasonality</p>
+          <h2>When does recorded evidence change through the year?</h2>
+          <p>
+            One view emphasises the repeating annual cycle for a selected
+            species; the other compares monthly rank across all five species.
+          </p>
         </div>
 
-        <div class="two-col">
-          <article class="chart-card">
+        <div class="two-col two-col--time">
+          <article class="chart-card chart-card--radial">
             <div class="chart-copy">
-
               <h3>A year in one circle</h3>
-              <p>Months are cyclic, so the radial layout reconnects December to January instead of treating the year as an open-ended line.</p>
+              <p>
+                Months form a cycle, so December reconnects to January rather
+                than ending as an open line.
+              </p>
             </div>
+
             <div id="vis08" class="vis"></div>
           </article>
 
           <article class="chart-card">
             <div class="chart-copy">
-
               <h3>Which species ranks highest each month?</h3>
-              <p>Use the focus menu to highlight one species. Rank reduces the dominance of species with very large raw record counts.</p>
+              <p>
+                Use the focus menu to highlight one species. Ranking reduces
+                the dominance of species with much larger raw record counts.
+              </p>
             </div>
+
             <div id="vis09" class="vis"></div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- HUMAN PRESSURE -->
     <section class="story-section page-width" id="pressure">
       <div class="section-heading">
-        <span class="section-number">05</span>
-        <div>
-          <p class="eyebrow">Human interaction</p>
-          <h2>Catch volume and recorded mortality are different questions.</h2>
-          <p>The Queensland Shark Control Program provides a direct human-interaction measure. The paired view separates the total number caught from the share recorded deceased at capture.</p>
-        </div>
+        <p class="eyebrow">Human interaction</p>
+        <h2>Catch volume and recorded mortality are different questions.</h2>
+        <p>
+          Queensland Shark Control Program records provide a direct
+          human-interaction measure: annual catch volume and the share recorded
+          deceased at capture.
+        </p>
       </div>
 
       <article class="chart-card chart-card--wide">
         <div class="chart-copy">
-
           <h3>Program catch volume and the share recorded deceased</h3>
-          <p>The upper bars show total animals caught each year; the lower line shows the proportion recorded deceased at capture.</p>
+          <p>
+            The upper bars show total animals caught each year; the lower line
+            shows the proportion recorded deceased at capture.
+          </p>
         </div>
+
         <div id="vis10" class="vis"></div>
-        <p class="annotation"><strong>Caution:</strong> this is not a trend in total marine-animal deaths or wild population size. The latest year may also be incomplete depending on the source refresh date.</p>
+
+        <p class="annotation">
+          This is not a trend in total marine-animal deaths or wild population
+          size. The latest year may also be incomplete depending on the source
+          refresh date.
+        </p>
       </article>
     </section>
 
-    <section class="story-section story-section--deep" id="protection">
-      <div class="page-width">
+    <!-- PROTECTION -->
+    <section class="story-band story-band--deep" id="protection">
+      <div class="page-width story-section">
         <div class="section-heading section-heading--light">
-          <span class="section-number">06</span>
-          <div>
-            <p class="eyebrow">Protection</p>
-            <h2>Important habitat and legal protection are not the same layer.</h2>
-            <p>The overlay map lets you visually compare one species and one BIA behaviour against Commonwealth marine parks, while the zoning chart explains how protection is managed across park networks.</p>
-          </div>
+          <p class="eyebrow eyebrow--light">Protection</p>
+          <h2>Important habitat and legal protection are not the same layer.</h2>
+          <p>
+            Compare one species' BIA with Commonwealth marine parks, then look
+            at how park zoning differs between marine-park networks.
+          </p>
         </div>
 
         <article class="chart-card chart-card--wide chart-card--on-dark">
           <div class="chart-copy">
-
             <h3>Where do BIAs visually meet Commonwealth marine parks?</h3>
-            <p>Teal polygons are Commonwealth marine parks; the orange dashed boundary is the selected species' BIA. Use the behaviour filter to ask a more specific spatial question.</p>
+            <p>
+              Teal polygons are Commonwealth marine parks; the orange dashed
+              boundary is the selected species' BIA.
+            </p>
           </div>
+
           <div id="vis11" class="vis"></div>
-          <p class="annotation"><strong>Do not read this as “% protected”.</strong> A true percentage requires geospatial intersection and area calculation.</p>
+
+          <p class="annotation">
+            Do not read this as “% protected”. A true percentage requires
+            geospatial intersection and area calculation.
+          </p>
         </article>
 
         <article class="chart-card chart-card--wide chart-card--on-dark">
           <div class="chart-copy">
-
             <h3>How does marine-park zoning mix differ between networks?</h3>
-            <p>Each row sums to 100%, making differences in zoning composition directly comparable even when networks differ in total area.</p>
+            <p>
+              Each row sums to 100%, so zoning composition can be compared even
+              when networks differ in total area.
+            </p>
           </div>
+
           <div id="vis12" class="vis"></div>
         </article>
       </div>
     </section>
 
-    <section class="story-section page-width" id="takeaways">
-      <div class="section-heading">
-        <span class="section-number">07</span>
-        <div><p class="eyebrow">Reading the whole story</p><h2>WIP</h2></div>
-      </div>
-
-      <div class="takeaway-grid">
-        <div class="takeaway"><span>1</span><p><strong>Observation evidence is uneven.</strong><br>ALA records show where evidence is concentrated, not where the most animals necessarily live.</p></div>
-        <div class="takeaway"><span>2</span><p><strong>Pressures are shared, but conservation status differs.</strong><br>The network shows common pressures across species while the EPBC ladder shows very different listing levels.</p></div>
-        <div class="takeaway"><span>3</span><p><strong>Important habitat and legal protection answer different questions.</strong><br>BIA and marine-park layers are most informative when read together, not interchangeably.</p></div>
-      </div>
-    </section>
-
+    <!-- SOURCES -->
     <section class="methods page-width" id="methods">
-      <h2>Sources & method</h2>
+      <div class="section-heading section-heading--methods">
+        <p class="eyebrow">Sources & method</p>
+        <h2>How the visualisation was built</h2>
+        <p>
+          The story combines occurrence records, biologically important areas,
+          marine-park data, conservation references and shark-control records.
+        </p>
+      </div>
+
       <div class="methods-grid">
         <div>
           <h3>Primary datasets</h3>
           <ul>
-            <li><a href="https://www.ala.org.au/" target="_blank" rel="noopener">Atlas of Living Australia</a> — focal-species occurrence records. Add the DOI generated for your exact download before submission.</li>
-            <li><a href="https://gis.environment.gov.au/gispub/rest/services/marine/BiologicallyImportantAreas/MapServer" target="_blank" rel="noopener">DCCEEW Biologically Important Areas</a> — migration, reproduction, foraging and resting polygons.</li>
-            <li><a href="https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/Australian_Marine_Parks/FeatureServer/0" target="_blank" rel="noopener">DCCEEW Australian Marine Parks</a> — park networks, zoning and area.</li>
-            <li><a href="https://www.data.qld.gov.au/dataset/fisheries-queensland-s-shark-control-program-information-and-data" target="_blank" rel="noopener">Queensland Shark Control Program</a> — catch records and status at capture.</li>
+            <li>
+              <a href="https://www.ala.org.au/" target="_blank" rel="noopener">
+                Atlas of Living Australia
+              </a>
+              — focal-species occurrence records. Add the DOI generated for
+              your exact download before submission.
+            </li>
+            <li>
+              <a href="https://gis.environment.gov.au/gispub/rest/services/marine/BiologicallyImportantAreas/MapServer" target="_blank" rel="noopener">
+                DCCEEW Biologically Important Areas
+              </a>
+              — migration, reproduction, foraging and resting polygons.
+            </li>
+            <li>
+              <a href="https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/Australian_Marine_Parks/FeatureServer/0" target="_blank" rel="noopener">
+                DCCEEW Australian Marine Parks
+              </a>
+              — park networks, zoning and area.
+            </li>
+            <li>
+              <a href="https://www.data.qld.gov.au/dataset/fisheries-queensland-s-shark-control-program-information-and-data" target="_blank" rel="noopener">
+                Queensland Shark Control Program
+              </a>
+              — catch records and status at capture.
+            </li>
           </ul>
         </div>
 
         <div>
           <h3>Conservation references</h3>
           <ul>
-            <li><a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/grey-nurse-shark" target="_blank" rel="noopener">Grey nurse shark (eastern) — DCCEEW</a></li>
-            <li><a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/priority-reptiles/green-turtle" target="_blank" rel="noopener">Green turtle — DCCEEW</a></li>
-            <li><a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/australian-sea-lion" target="_blank" rel="noopener">Australian sea lion — DCCEEW</a></li>
-            <li><a href="https://www.dcceew.gov.au/environment/marine/marine-species/cetaceans/entanglements" target="_blank" rel="noopener">Whale and dolphin entanglements — DCCEEW</a></li>
+            <li>
+              <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/grey-nurse-shark" target="_blank" rel="noopener">
+                Grey nurse shark (eastern) — DCCEEW
+              </a>
+            </li>
+            <li>
+              <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/priority-reptiles/green-turtle" target="_blank" rel="noopener">
+                Green turtle — DCCEEW
+              </a>
+            </li>
+            <li>
+              <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/action-plan/australian-sea-lion" target="_blank" rel="noopener">
+                Australian sea lion — DCCEEW
+              </a>
+            </li>
+            <li>
+              <a href="https://www.dcceew.gov.au/environment/marine/marine-species/cetaceans/entanglements" target="_blank" rel="noopener">
+                Whale and dolphin entanglements — DCCEEW
+              </a>
+            </li>
           </ul>
         </div>
 
-        
+        <div>
+          <h3>Cartographic method</h3>
+          <p>
+            Australia-wide maps use an equal-area conic projection. DCCEEW
+            polygon layers are clipped to an Australia-wide viewing window,
+            validated, simplified and rewound before rendering.
+          </p>
+        </div>
+
+        <div>
+          <h3>Reading the charts</h3>
+          <p>
+            Occurrence records represent observation evidence rather than
+            population size. BIA polygons represent documented important-use
+            areas rather than complete species ranges. Tooltips retain the
+            underlying values where detail is useful.
+          </p>
+        </div>
       </div>
     </section>
   </main>
 
+  <!-- Kept for compatibility with the existing main.js, hidden by CSS. -->
   <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
   <footer class="footer">
     <div class="page-width footer__inner">
       <p><strong>Author:</strong> Krish Berry (33891052) · FIT3179 Data Visualisation 2 · 2026</p>
-      <p><strong>AI acknowledgement:</strong> Generative AI was used for code debugging and design feedback. The student reviewed, tested and adapted the final work.</p>
+      <p>
+        <strong>AI acknowledgement:</strong> Generative AI was used for code
+        prototyping, editing and design feedback. The student reviewed, tested
+        and adapted the final work.
+      </p>
     </div>
   </footer>
 

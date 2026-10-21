@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Radial monthly occurrence profile.",
+  "description": "Compact radial monthly occurrence profile with labels outside the wedges.",
   "width": "container",
-  "height": 410,
+  "height": 360,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -37,9 +37,10 @@
     {
       "mark": {
         "type": "arc",
-        "innerRadius": 48,
+        "innerRadius": 38,
         "stroke": "#FFFFFF",
-        "strokeWidth": 1
+        "strokeWidth": 1.2,
+        "cornerRadius": 2
       },
       "encoding": {
         "theta": {
@@ -65,7 +66,11 @@
           "type": "quantitative",
           "scale": {
             "type": "sqrt",
-            "zero": true
+            "zero": true,
+            "range": [
+              48,
+              132
+            ]
           },
           "title": "ALA records"
         },
@@ -110,7 +115,7 @@
     {
       "mark": {
         "type": "text",
-        "radius": 187,
+        "radius": 158,
         "fontSize": 11,
         "fontWeight": 700,
         "color": "#334155"

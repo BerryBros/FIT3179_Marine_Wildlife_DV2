@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Marine Parks and BIA overlay.",
+  "description": "Marine Parks and BIA overlay with stronger contrast for selected BIA polygons.",
   "width": "container",
   "height": 500,
   "autosize": {
@@ -69,8 +69,8 @@
       "mark": {
         "type": "geoshape",
         "fill": "#F4EFE4",
-        "stroke": "#536B77",
-        "strokeWidth": 1.0
+        "stroke": "#4E6874",
+        "strokeWidth": 1.05
       }
     },
     {
@@ -83,10 +83,10 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#18A89D",
-        "fillOpacity": 0.22,
-        "stroke": "#0E7F78",
-        "strokeWidth": 0.8
+        "fill": "#21A9A1",
+        "fillOpacity": 0.13,
+        "stroke": "#087D78",
+        "strokeWidth": 1.05
       },
       "encoding": {
         "tooltip": [
@@ -119,13 +119,10 @@
       ],
       "mark": {
         "type": "geoshape",
-        "fillOpacity": 0.02,
-        "stroke": "#E57E25",
-        "strokeWidth": 1.6,
-        "strokeDash": [
-          7,
-          4
-        ]
+        "fill": "#F28E2B",
+        "fillOpacity": 0.3,
+        "stroke": "#C95E0C",
+        "strokeWidth": 2.3
       },
       "encoding": {
         "tooltip": [
@@ -148,7 +145,7 @@
   "config": {
     "view": {
       "stroke": null,
-      "fill": "#EAF6FB"
+      "fill": "#DDEFF3"
     },
     "axis": {
       "labelFont": "Manrope",
@@ -162,10 +159,6 @@
       "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333"
-    },
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
     }
   }
 }

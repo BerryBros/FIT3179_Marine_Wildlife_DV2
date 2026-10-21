@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "ALA occurrence point map.",
+  "description": "ALA occurrence point map with high-contrast occurrence marks.",
   "width": "container",
-  "height": 470,
+  "height": 430,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -54,9 +54,9 @@
       ],
       "mark": {
         "type": "geoshape",
-        "fill": "#F4EFE4",
-        "stroke": "#536B77",
-        "strokeWidth": 1.0
+        "fill": "#F3EFE4",
+        "stroke": "#4C6672",
+        "strokeWidth": 1.15
       }
     },
     {
@@ -70,10 +70,9 @@
       ],
       "mark": {
         "type": "circle",
-        "size": 18,
-        "opacity": 0.46,
+        "filled": true,
         "stroke": "#FFFFFF",
-        "strokeWidth": 0.3
+        "strokeWidth": 0.75
       },
       "encoding": {
         "longitude": {
@@ -83,6 +82,20 @@
         "latitude": {
           "field": "latitude",
           "type": "quantitative"
+        },
+        "size": {
+          "condition": {
+            "test": "speciesPick !== 'All species'",
+            "value": 42
+          },
+          "value": 27
+        },
+        "opacity": {
+          "condition": {
+            "test": "speciesPick !== 'All species'",
+            "value": 0.9
+          },
+          "value": 0.68
         },
         "color": {
           "field": "species",
@@ -96,17 +109,19 @@
               "Australian sea lion"
             ],
             "range": [
-              "#4F7CAC",
-              "#42B7B0",
-              "#6DB56D",
-              "#D98B3A",
-              "#9B75CF"
+              "#2F6FB0",
+              "#008E8B",
+              "#4A9854",
+              "#D97706",
+              "#7B4FC7"
             ]
           },
           "legend": {
             "title": "Species",
             "orient": "bottom",
-            "columns": 2
+            "columns": 3,
+            "symbolOpacity": 1,
+            "symbolSize": 90
           }
         },
         "tooltip": [
@@ -130,7 +145,7 @@
   "config": {
     "view": {
       "stroke": null,
-      "fill": "#EAF6FB"
+      "fill": "#DFF1F4"
     },
     "axis": {
       "labelFont": "Manrope",
@@ -142,12 +157,8 @@
     "legend": {
       "labelFont": "Manrope",
       "titleFont": "Manrope",
-      "labelColor": "#405363",
+      "labelColor": "#334B58",
       "titleColor": "#102333"
-    },
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
     }
   }
 }

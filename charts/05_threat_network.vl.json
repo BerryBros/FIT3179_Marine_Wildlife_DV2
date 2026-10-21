@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Bipartite network linking focal marine species to documented pressure categories.",
-  "width": 760,
-  "height": 360,
+  "description": "Bipartite network linking focal species to documented pressures, with pressure-side counts.",
+  "width": 780,
+  "height": 370,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -50,11 +50,11 @@
           "as": "tx"
         },
         {
-          "calculate": "indexof([\"Humpback whale\", \"Indo-Pacific bottlenose dolphin\", \"Green turtle\", \"Grey nurse shark\", \"Australian sea lion\"], datum.species) + 1",
+          "calculate": "indexof(['Humpback whale','Indo-Pacific bottlenose dolphin','Green turtle','Grey nurse shark','Australian sea lion'], datum.species) + 1",
           "as": "sy"
         },
         {
-          "calculate": "indexof([\"Fishing / bycatch\", \"Entanglement / debris\", \"Climate / heat\", \"Habitat change\", \"Vessels / noise / protection gear\"], datum.threat) + 1",
+          "calculate": "indexof(['Fishing / bycatch','Entanglement / debris','Climate / heat','Habitat change','Vessels / noise / protection gear'], datum.threat) + 1",
           "as": "ty"
         }
       ],
@@ -64,30 +64,30 @@
       },
       "encoding": {
         "x": {
+          "field": "sx",
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.42,
-              1.42
+              -0.48,
+              1.56
             ]
           },
-          "axis": null,
-          "field": "sx"
+          "axis": null
         },
         "x2": {
           "field": "tx"
         },
         "y": {
+          "field": "sy",
           "type": "quantitative",
           "scale": {
             "domain": [
-              0.5,
-              5.5
+              0.25,
+              5.55
             ],
             "reverse": true
           },
-          "axis": null,
-          "field": "sy"
+          "axis": null
         },
         "y2": {
           "field": "ty"
@@ -104,11 +104,11 @@
               "Australian sea lion"
             ],
             "range": [
-              "#4F7CAC",
-              "#42B7B0",
-              "#6DB56D",
-              "#D98B3A",
-              "#9B75CF"
+              "#2F6FB0",
+              "#008E8B",
+              "#4A9854",
+              "#D97706",
+              "#7B4FC7"
             ]
           },
           "legend": null
@@ -116,14 +116,14 @@
         "opacity": {
           "condition": {
             "test": "networkFocus === 'All species' || datum.species === networkFocus",
-            "value": 0.68
+            "value": 0.72
           },
           "value": 0.08
         },
         "strokeWidth": {
           "condition": {
             "test": "networkFocus === 'All species' || datum.species === networkFocus",
-            "value": 2.5
+            "value": 2.7
           },
           "value": 1.0
         },
@@ -164,7 +164,7 @@
           "as": "xpos"
         },
         {
-          "calculate": "indexof([\"Humpback whale\", \"Indo-Pacific bottlenose dolphin\", \"Green turtle\", \"Grey nurse shark\", \"Australian sea lion\"], datum.species) + 1",
+          "calculate": "indexof(['Humpback whale','Indo-Pacific bottlenose dolphin','Green turtle','Grey nurse shark','Australian sea lion'], datum.species) + 1",
           "as": "ypos"
         }
       ],
@@ -172,31 +172,31 @@
         "type": "point",
         "filled": true,
         "stroke": "#FFFFFF",
-        "strokeWidth": 1.6
+        "strokeWidth": 1.7
       },
       "encoding": {
         "x": {
+          "field": "xpos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.42,
-              1.42
+              -0.48,
+              1.56
             ]
           },
-          "axis": null,
-          "field": "xpos"
+          "axis": null
         },
         "y": {
+          "field": "ypos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              0.5,
-              5.5
+              0.25,
+              5.55
             ],
             "reverse": true
           },
-          "axis": null,
-          "field": "ypos"
+          "axis": null
         },
         "size": {
           "field": "degree",
@@ -207,8 +207,8 @@
               5
             ],
             "range": [
-              180,
-              650
+              220,
+              700
             ]
           },
           "legend": null
@@ -225,11 +225,11 @@
               "Australian sea lion"
             ],
             "range": [
-              "#4F7CAC",
-              "#42B7B0",
-              "#6DB56D",
-              "#D98B3A",
-              "#9B75CF"
+              "#2F6FB0",
+              "#008E8B",
+              "#4A9854",
+              "#D97706",
+              "#7B4FC7"
             ]
           },
           "legend": null
@@ -240,17 +240,7 @@
             "value": 1
           },
           "value": 0.28
-        },
-        "tooltip": [
-          {
-            "field": "species",
-            "title": "Species"
-          },
-          {
-            "field": "degree",
-            "title": "Documented pressure links"
-          }
-        ]
+        }
       }
     },
     {
@@ -274,7 +264,7 @@
           "as": "xpos"
         },
         {
-          "calculate": "indexof([\"Humpback whale\", \"Indo-Pacific bottlenose dolphin\", \"Green turtle\", \"Grey nurse shark\", \"Australian sea lion\"], datum.species) + 1",
+          "calculate": "indexof(['Humpback whale','Indo-Pacific bottlenose dolphin','Green turtle','Grey nurse shark','Australian sea lion'], datum.species) + 1",
           "as": "ypos"
         }
       ],
@@ -282,34 +272,34 @@
         "type": "text",
         "align": "right",
         "baseline": "middle",
-        "dx": -14,
+        "dx": -15,
         "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#263B49"
+        "fontWeight": 750,
+        "color": "#1F3440"
       },
       "encoding": {
         "x": {
+          "field": "xpos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.42,
-              1.42
+              -0.48,
+              1.56
             ]
           },
-          "axis": null,
-          "field": "xpos"
+          "axis": null
         },
         "y": {
+          "field": "ypos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              0.5,
-              5.5
+              0.25,
+              5.55
             ],
             "reverse": true
           },
-          "axis": null,
-          "field": "ypos"
+          "axis": null
         },
         "text": {
           "field": "species"
@@ -319,7 +309,7 @@
             "test": "networkFocus === 'All species' || datum.species === networkFocus",
             "value": 1
           },
-          "value": 0.35
+          "value": 0.38
         }
       }
     },
@@ -344,39 +334,44 @@
           "as": "xpos"
         },
         {
-          "calculate": "indexof([\"Fishing / bycatch\", \"Entanglement / debris\", \"Climate / heat\", \"Habitat change\", \"Vessels / noise / protection gear\"], datum.threat) + 1",
+          "calculate": "indexof(['Fishing / bycatch','Entanglement / debris','Climate / heat','Habitat change','Vessels / noise / protection gear'], datum.threat) + 1",
           "as": "ypos"
+        },
+        {
+          "calculate": "datum.threat + '  \u00b7  ' + datum.degree + (datum.degree === 1 ? ' species' : ' species')",
+          "as": "pressure_label"
         }
       ],
       "mark": {
         "type": "point",
         "filled": true,
+        "color": "#17495A",
         "stroke": "#FFFFFF",
-        "strokeWidth": 1.6
+        "strokeWidth": 1.7
       },
       "encoding": {
         "x": {
+          "field": "xpos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.42,
-              1.42
+              -0.48,
+              1.56
             ]
           },
-          "axis": null,
-          "field": "xpos"
+          "axis": null
         },
         "y": {
+          "field": "ypos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              0.5,
-              5.5
+              0.25,
+              5.55
             ],
             "reverse": true
           },
-          "axis": null,
-          "field": "ypos"
+          "axis": null
         },
         "size": {
           "field": "degree",
@@ -387,29 +382,8 @@
               5
             ],
             "range": [
-              180,
-              650
-            ]
-          },
-          "legend": null
-        },
-        "color": {
-          "field": "threat",
-          "type": "nominal",
-          "scale": {
-            "domain": [
-              "Fishing / bycatch",
-              "Entanglement / debris",
-              "Climate / heat",
-              "Habitat change",
-              "Vessels / noise / protection gear"
-            ],
-            "range": [
-              "#D95F4A",
-              "#E29555",
-              "#B78BC7",
-              "#7AA6A1",
-              "#667C99"
+              220,
+              760
             ]
           },
           "legend": null
@@ -447,46 +421,101 @@
           "as": "xpos"
         },
         {
-          "calculate": "indexof([\"Fishing / bycatch\", \"Entanglement / debris\", \"Climate / heat\", \"Habitat change\", \"Vessels / noise / protection gear\"], datum.threat) + 1",
+          "calculate": "indexof(['Fishing / bycatch','Entanglement / debris','Climate / heat','Habitat change','Vessels / noise / protection gear'], datum.threat) + 1",
           "as": "ypos"
+        },
+        {
+          "calculate": "datum.threat + '  \u00b7  ' + datum.degree + ' species'",
+          "as": "pressure_label"
         }
       ],
       "mark": {
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 14,
+        "dx": 15,
         "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#263B49",
-        "limit": 220
+        "fontWeight": 750,
+        "color": "#1F3440",
+        "limit": 255
       },
       "encoding": {
         "x": {
+          "field": "xpos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.42,
-              1.42
+              -0.48,
+              1.56
             ]
           },
-          "axis": null,
-          "field": "xpos"
+          "axis": null
         },
         "y": {
+          "field": "ypos",
           "type": "quantitative",
           "scale": {
             "domain": [
-              0.5,
-              5.5
+              0.25,
+              5.55
             ],
             "reverse": true
           },
-          "axis": null,
-          "field": "ypos"
+          "axis": null
         },
         "text": {
-          "field": "threat"
+          "field": "pressure_label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "y": 0.34,
+            "label": "FOCAL SPECIES"
+          },
+          {
+            "x": 1,
+            "y": 0.34,
+            "label": "DOCUMENTED PRESSURES"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 800,
+        "color": "#6A7E89",
+        "letterSpacing": 1.2
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.48,
+              1.56
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.25,
+              5.55
+            ],
+            "reverse": true
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label"
         }
       }
     }

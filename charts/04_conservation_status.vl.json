@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "EPBC threatened status of focal marine wildlife.",
+  "description": "Discrete EPBC status classification for the five focal species/populations.",
   "width": "container",
-  "height": 300,
+  "height": 305,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -17,6 +17,12 @@
       }
     }
   },
+  "transform": [
+    {
+      "calculate": "datum.status === 'Critically Endangered' ? 'CE' : datum.status === 'Endangered' ? 'EN' : datum.status === 'Vulnerable' ? 'VU' : '\u2014'",
+      "as": "status_short"
+    }
+  ],
   "encoding": {
     "y": {
       "field": "display_species",
@@ -30,28 +36,24 @@
       ],
       "title": null,
       "axis": {
-        "labelLimit": 230
+        "labelLimit": 235,
+        "labelPadding": 8
       }
     },
     "x": {
-      "field": "status_rank",
-      "type": "quantitative",
-      "title": "EPBC threatened category",
-      "scale": {
-        "domain": [
-          -0.1,
-          3.1
-        ]
-      },
+      "field": "status",
+      "type": "ordinal",
+      "sort": [
+        "Not EPBC threatened",
+        "Vulnerable",
+        "Endangered",
+        "Critically Endangered"
+      ],
+      "title": "EPBC listing category",
       "axis": {
-        "values": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "labelExpr": "datum.value == 0 ? 'Not threatened' : datum.value == 1 ? 'Vulnerable' : datum.value == 2 ? 'Endangered' : 'Critically endangered'",
+        "labelExpr": "datum.label === 'Not EPBC threatened' ? 'Not listed' : datum.label",
         "labelAngle": 0,
+        "labelLimit": 150,
         "grid": true
       }
     }
@@ -60,10 +62,11 @@
     {
       "mark": {
         "type": "point",
+        "shape": "square",
         "filled": true,
-        "size": 240,
+        "size": 700,
         "stroke": "#FFFFFF",
-        "strokeWidth": 1.5
+        "strokeWidth": 2
       },
       "encoding": {
         "color": {
@@ -78,10 +81,10 @@
               "Critically Endangered"
             ],
             "range": [
-              "#8EA3AD",
-              "#D7A84E",
-              "#E67A55",
-              "#B94A5A"
+              "#94A6AE",
+              "#D8AE50",
+              "#E47B54",
+              "#B84D60"
             ]
           }
         },
@@ -92,7 +95,7 @@
           },
           {
             "field": "status",
-            "title": "EPBC threatened status"
+            "title": "EPBC status"
           },
           {
             "field": "listing_note",
@@ -104,16 +107,13 @@
     {
       "mark": {
         "type": "text",
-        "dx": 13,
-        "align": "left",
-        "baseline": "middle",
-        "fontSize": 11,
-        "fontWeight": 700,
-        "color": "#405363"
+        "fontSize": 12,
+        "fontWeight": 800,
+        "color": "#FFFFFF"
       },
       "encoding": {
         "text": {
-          "field": "status"
+          "field": "status_short"
         }
       }
     }
@@ -127,13 +127,9 @@
       "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333",
-      "gridColor": "#DCE7EA"
-    },
-    "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
-      "labelColor": "#405363",
-      "titleColor": "#102333"
+      "gridColor": "#E0E8EB",
+      "domainColor": "#A9BCC3",
+      "tickColor": "#A9BCC3"
     }
   }
 }

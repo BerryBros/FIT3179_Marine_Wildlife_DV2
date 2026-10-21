@@ -3,27 +3,40 @@
   "description": "ALA occurrence-record totals for the focal species; a data-coverage check, not an abundance estimate.",
   "width": "container",
   "height": 310,
+
   "autosize": {
     "type": "fit",
     "contains": "padding",
     "resize": true
   },
+
   "data": {
     "url": "data/ala_species_counts.csv"
   },
+
   "encoding": {
     "y": {
       "field": "species",
       "type": "nominal",
       "title": null,
-      "sort": "-x"
+      "scale": {
+        "domain": [
+          "Green turtle",
+          "Australian sea lion",
+          "Humpback whale",
+          "Indo-Pacific bottlenose dolphin",
+          "Grey nurse shark"
+        ]
+      }
     },
+
     "x": {
       "field": "record_count",
       "type": "quantitative",
       "title": "ALA occurrence records"
     }
   },
+
   "layer": [
     {
       "mark": {
@@ -31,22 +44,26 @@
         "strokeWidth": 2,
         "color": "#CBD5E1"
       },
+
       "encoding": {
         "x2": {
           "datum": 0
         }
       }
     },
+
     {
       "mark": {
         "type": "point",
         "filled": true,
         "size": 160
       },
+
       "encoding": {
         "color": {
           "field": "species",
           "type": "nominal",
+
           "scale": {
             "domain": [
               "Humpback whale",
@@ -55,6 +72,7 @@
               "Grey nurse shark",
               "Australian sea lion"
             ],
+
             "range": [
               "#2A6FDB",
               "#00A6A6",
@@ -63,8 +81,10 @@
               "#8E63CE"
             ]
           },
+
           "legend": null
         },
+
         "tooltip": [
           {
             "field": "species",
@@ -79,10 +99,12 @@
       }
     }
   ],
+
   "config": {
     "view": {
       "stroke": null
     },
+
     "axis": {
       "labelFont": "Manrope",
       "titleFont": "Manrope",
@@ -90,12 +112,14 @@
       "titleColor": "#0F172A",
       "gridColor": "#E2E8F0"
     },
+
     "legend": {
       "labelFont": "Manrope",
       "titleFont": "Manrope",
       "labelColor": "#334155",
       "titleColor": "#0F172A"
     },
+
     "header": {
       "labelFont": "Manrope",
       "titleFont": "Manrope"
