@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "BIA behaviour polygons.",
   "width": "container",
-  "height": 500,
+  "height": 420,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -109,10 +109,10 @@
               "Resting"
             ],
             "range": [
-              "#3B82F6",
-              "#E76F9A",
-              "#2A9D8F",
-              "#8B5CF6"
+              "#0072B2",
+              "#CC79A7",
+              "#009E73",
+              "#E69F00"
             ]
           },
           "legend": {
@@ -146,21 +146,14 @@
       "fill": "#EAF6FB"
     },
     "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333",
       "gridColor": "#DCE7EA"
     },
     "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333"
     },
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
-    }
+    "header": {}
   }
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Bipartite network linking focal species to documented pressures, with pressure-side counts.",
-  "width": 780,
-  "height": 370,
+  "description": "Bipartite network linking focal species to documented threat types; node size shows how widely each threat type is shared.",
+  "width": "container",
+  "height": 355,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -68,8 +68,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -104,11 +104,11 @@
               "Australian sea lion"
             ],
             "range": [
-              "#2F6FB0",
-              "#008E8B",
-              "#4A9854",
-              "#D97706",
-              "#7B4FC7"
+              "#0072B2",
+              "#56B4E9",
+              "#009E73",
+              "#E69F00",
+              "#CC79A7"
             ]
           },
           "legend": null
@@ -134,7 +134,7 @@
           },
           {
             "field": "threat",
-            "title": "Documented pressure"
+            "title": "Documented threat"
           },
           {
             "field": "note",
@@ -180,8 +180,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -225,11 +225,11 @@
               "Australian sea lion"
             ],
             "range": [
-              "#2F6FB0",
-              "#008E8B",
-              "#4A9854",
-              "#D97706",
-              "#7B4FC7"
+              "#0072B2",
+              "#56B4E9",
+              "#009E73",
+              "#E69F00",
+              "#CC79A7"
             ]
           },
           "legend": null
@@ -283,8 +283,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -338,7 +338,7 @@
           "as": "ypos"
         },
         {
-          "calculate": "datum.threat + '  \u00b7  ' + datum.degree + (datum.degree === 1 ? ' species' : ' species')",
+          "calculate": "datum.threat === 'Vessels / noise / protection gear' ? 'Vessels, noise & shark gear' : datum.threat",
           "as": "pressure_label"
         }
       ],
@@ -355,8 +355,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -391,7 +391,7 @@
         "tooltip": [
           {
             "field": "threat",
-            "title": "Pressure"
+            "title": "Threat"
           },
           {
             "field": "degree",
@@ -425,7 +425,7 @@
           "as": "ypos"
         },
         {
-          "calculate": "datum.threat + '  \u00b7  ' + datum.degree + ' species'",
+          "calculate": "datum.threat === 'Vessels / noise / protection gear' ? 'Vessels, noise & shark gear' : datum.threat",
           "as": "pressure_label"
         }
       ],
@@ -437,7 +437,7 @@
         "fontSize": 12,
         "fontWeight": 750,
         "color": "#1F3440",
-        "limit": 255
+        "limit": 330
       },
       "encoding": {
         "x": {
@@ -445,8 +445,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -479,7 +479,7 @@
           {
             "x": 1,
             "y": 0.34,
-            "label": "DOCUMENTED PRESSURES"
+            "label": "DOCUMENTED THREATS"
           }
         ]
       },
@@ -496,8 +496,8 @@
           "type": "quantitative",
           "scale": {
             "domain": [
-              -0.48,
-              1.56
+              -0.95,
+              2.05
             ]
           },
           "axis": null
@@ -524,9 +524,6 @@
     "view": {
       "stroke": null
     },
-    "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
-    }
+    "axis": {}
   }
 }

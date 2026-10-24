@@ -2,18 +2,15 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "ALA occurrence-record totals for the focal species; a data-coverage check, not an abundance estimate.",
   "width": "container",
-  "height": 310,
-
+  "height": 390,
   "autosize": {
     "type": "fit",
     "contains": "padding",
     "resize": true
   },
-
   "data": {
     "url": "data/ala_species_counts.csv"
   },
-
   "encoding": {
     "y": {
       "field": "species",
@@ -29,14 +26,30 @@
         ]
       }
     },
-
     "x": {
       "field": "record_count",
       "type": "quantitative",
-      "title": "ALA occurrence records"
+      "title": "ALA occurrence records",
+      "scale": {
+        "domain": [
+          0,
+          170000
+        ],
+        "nice": false
+      },
+      "axis": {
+        "values": [
+          0,
+          40000,
+          80000,
+          120000,
+          160000
+        ],
+        "labelExpr": "datum.value === 0 ? '0' : datum.value / 1000 + 'k'",
+        "title": "ALA occurrence records"
+      }
     }
   },
-
   "layer": [
     {
       "mark": {
@@ -44,26 +57,22 @@
         "strokeWidth": 2,
         "color": "#CBD5E1"
       },
-
       "encoding": {
         "x2": {
           "datum": 0
         }
       }
     },
-
     {
       "mark": {
         "type": "point",
         "filled": true,
         "size": 160
       },
-
       "encoding": {
         "color": {
           "field": "species",
           "type": "nominal",
-
           "scale": {
             "domain": [
               "Humpback whale",
@@ -72,19 +81,16 @@
               "Grey nurse shark",
               "Australian sea lion"
             ],
-
             "range": [
-              "#2A6FDB",
-              "#00A6A6",
-              "#55A868",
-              "#F28E2B",
-              "#8E63CE"
+              "#0072B2",
+              "#56B4E9",
+              "#009E73",
+              "#E69F00",
+              "#CC79A7"
             ]
           },
-
           "legend": null
         },
-
         "tooltip": [
           {
             "field": "species",
@@ -97,32 +103,38 @@
           }
         ]
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 13,
+        "fontWeight": 700,
+        "fontSize": 12,
+        "color": "#1F3440"
+      },
+      "encoding": {
+        "text": {
+          "field": "record_count",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
     }
   ],
-
   "config": {
     "view": {
       "stroke": null
     },
-
     "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#334155",
       "titleColor": "#0F172A",
       "gridColor": "#E2E8F0"
     },
-
     "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#334155",
       "titleColor": "#0F172A"
     },
-
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
-    }
+    "header": {}
   }
 }

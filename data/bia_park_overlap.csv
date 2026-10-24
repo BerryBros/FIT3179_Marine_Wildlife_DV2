@@ -1,0 +1,20 @@
+species,behaviour,feature_count,bia_area_km2,inside_parks_km2,pct_inside_parks,join_key
+Australian sea lion,All behaviours,14,293004.0,71061.3,24.3,Australian sea lion|All behaviours
+Australian sea lion,Foraging,14,293004.0,71061.3,24.3,Australian sea lion|Foraging
+Green turtle,All behaviours,469,143865.6,32610.6,22.7,Green turtle|All behaviours
+Green turtle,Foraging,382,54856.5,7864.7,14.3,Green turtle|Foraging
+Green turtle,Migration,1,346.3,0.0,0.0,Green turtle|Migration
+Green turtle,Reproduction,85,90184.4,24781.0,27.5,Green turtle|Reproduction
+Green turtle,Resting,1,165.8,0.0,0.0,Green turtle|Resting
+Grey nurse shark,All behaviours,36,118081.4,1614.2,1.4,Grey nurse shark|All behaviours
+Grey nurse shark,Foraging,15,89671.1,472.3,0.5,Grey nurse shark|Foraging
+Grey nurse shark,Migration,15,28692.8,1143.0,4.0,Grey nurse shark|Migration
+Grey nurse shark,Reproduction,6,47227.9,1463.8,3.1,Grey nurse shark|Reproduction
+Humpback whale,All behaviours,26,844886.5,174986.6,20.7,Humpback whale|All behaviours
+Humpback whale,Migration,18,412643.2,86425.8,20.9,Humpback whale|Migration
+Humpback whale,Reproduction,3,467395.4,110029.2,23.5,Humpback whale|Reproduction
+Humpback whale,Resting,5,68195.2,21468.3,31.5,Humpback whale|Resting
+Indo-Pacific bottlenose dolphin,All behaviours,35,191984.9,84.5,0.0,Indo-Pacific bottlenose dolphin|All behaviours
+Indo-Pacific bottlenose dolphin,Foraging,10,16990.0,59.6,0.4,Indo-Pacific bottlenose dolphin|Foraging
+Indo-Pacific bottlenose dolphin,Migration,1,341.8,38.4,11.2,Indo-Pacific bottlenose dolphin|Migration
+Indo-Pacific bottlenose dolphin,Reproduction,24,188566.4,46.2,0.0,Indo-Pacific bottlenose dolphin|Reproduction

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Horizontal waffle comparison of mapped Biologically Important Area inside Commonwealth marine parks by species and behaviour. Five species are shown side by side, with missing species-behaviour combinations labelled N/A.",
+  "width": "container",
+  "height": 215,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "values": [
+      {"species": "Humpback whale", "short": "Humpback whale", "species_order": 0},
+      {"species": "Indo-Pacific bottlenose dolphin", "short": "Bottlenose dolphin", "species_order": 1},
+      {"species": "Green turtle", "short": "Green turtle", "species_order": 2},
+      {"species": "Grey nurse shark", "short": "Grey nurse shark", "species_order": 3},
+      {"species": "Australian sea lion", "short": "Australian sea lion", "species_order": 4}
+    ]
+  },
+  "params": [
+    {
+      "name": "wafBehaviour",
+      "value": "All behaviours",
+      "bind": {
+        "input": "select",
+        "name": "Behaviour: ",
+        "options": ["All behaviours", "Migration", "Reproduction", "Foraging", "Resting"],
+        "element": "#waffleBehaviourControl"
+      }
+    }
+  ],
+  "transform": [
+    {"calculate": "datum.species + '|' + wafBehaviour", "as": "join_key"},
+    {"calculate": "wafBehaviour", "as": "selected_behaviour"},
+    {
+      "lookup": "join_key",
+      "from": {
+        "data": {"url": "data/bia_park_overlap.csv"},
+        "key": "join_key",
+        "fields": ["behaviour", "feature_count", "bia_area_km2", "inside_parks_km2", "pct_inside_parks"]
+      }
+    },
+    {"calculate": "isValid(datum.pct_inside_parks)", "as": "available"},
+    {"calculate": "datum.available ? (datum.pct_inside_parks < 1 && datum.inside_parks_km2 > 0 ? '<1%' : format(datum.pct_inside_parks, '.0f') + '%') : 'N/A'", "as": "pct_label"},
+    {"calculate": "datum.available ? floor(datum.pct_inside_parks) : 0", "as": "n_inside"},
+    {"calculate": "sequence(0, 100)", "as": "cell"},
+    {"flatten": ["cell"]},
+    {"calculate": "datum.cell % 10", "as": "col"},
+    {"calculate": "9 - floor(datum.cell / 10)", "as": "row"},
+    {"calculate": "datum.species_order * 14 + datum.col * 0.82", "as": "x_pos"},
+    {"calculate": "datum.species_order * 14 + 3.69", "as": "label_x"},
+    {"calculate": "!datum.available ? 'No mapped BIA' : (datum.cell < datum.n_inside ? 'Inside parks' : 'Outside parks')", "as": "where"}
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "shape": "square",
+        "filled": true,
+        "size": 82,
+        "stroke": "#F7FBFA",
+        "strokeWidth": 1.15,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [-1.2, 64.2], "nice": false}
+        },
+        "y": {
+          "field": "row",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [-2.6, 12.8], "nice": false}
+        },
+        "color": {
+          "field": "where",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Inside parks", "Outside parks", "No mapped BIA"],
+            "range": ["#0E8F8A", "#EAD8A8", "#D9E4E3"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "species", "title": "Species"},
+          {"field": "selected_behaviour", "title": "Selected behaviour"},
+          {"field": "bia_area_km2", "title": "Mapped important area (km²)", "format": ",.0f"},
+          {"field": "inside_parks_km2", "title": "Inside Commonwealth marine parks (km²)", "format": ",.0f"},
+          {"field": "pct_label", "title": "Share inside parks"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.cell === 0"}],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 13,
+        "fontWeight": 800,
+        "color": "#16333A"
+      },
+      "encoding": {
+        "x": {
+          "field": "label_x",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [-1.2, 64.2], "nice": false}
+        },
+        "y": {"datum": 11.15, "type": "quantitative", "axis": null, "scale": {"domain": [-2.6, 12.8], "nice": false}},
+        "text": {"field": "short"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.cell === 0"}],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 18,
+        "fontWeight": 800,
+        "color": "#0A5F5C"
+      },
+      "encoding": {
+        "x": {
+          "field": "label_x",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [-1.2, 64.2], "nice": false}
+        },
+        "y": {"datum": -1.45, "type": "quantitative", "axis": null, "scale": {"domain": [-2.6, 12.8], "nice": false}},
+        "text": {"field": "pct_label"},
+        "color": {
+          "condition": {"test": "datum.available", "value": "#0A5F5C"},
+          "value": "#6C7F86"
+        }
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

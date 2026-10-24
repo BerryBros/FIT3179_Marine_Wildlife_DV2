@@ -1,0 +1,35 @@
+id,parent,network,iucn_zone,area_km2
+Australian Marine Parks,,,,
+Coral Sea,Australian Marine Parks,Coral Sea,,
+Coral Sea | II,Coral Sea,Coral Sea,II,238399.8
+Coral Sea | IV,Coral Sea,Coral Sea,IV,684955.9
+Coral Sea | VI,Coral Sea,Coral Sea,VI,66480.4
+Heard Island and McDonald Islands,Australian Marine Parks,Heard Island and McDonald Islands,,
+Heard Island and McDonald Islands | II,Heard Island and McDonald Islands,Heard Island and McDonald Islands,II,139737.5
+Heard Island and McDonald Islands | IV,Heard Island and McDonald Islands,Heard Island and McDonald Islands,IV,169964.9
+Heard Island and McDonald Islands | Ia,Heard Island and McDonald Islands,Heard Island and McDonald Islands,Ia,70952.5
+Indian Ocean Territories,Australian Marine Parks,Indian Ocean Territories,,
+Indian Ocean Territories | II,Indian Ocean Territories,Indian Ocean Territories,II,739032.0
+Indian Ocean Territories | IV,Indian Ocean Territories,Indian Ocean Territories,IV,5037.9
+North,Australian Marine Parks,North,,
+North | II,North,North,II,7358.4
+North | IV,North,North,IV,22253.3
+North | VI,North,North,VI,127867.8
+North-west,Australian Marine Parks,North-west,,
+North-west | II,North-west,North-west,II,52302.8
+North-west | IV,North-west,North-west,IV,53281.5
+North-west | Ia,North-west,North-west,Ia,722.3
+North-west | VI,North-west,North-west,VI,229034.5
+South-east,Australian Marine Parks,South-east,,
+South-east | II,South-east,South-east,II,551209.9
+South-east | IV,South-east,South-east,IV,48156.1
+South-east | Ia,South-east,South-east,Ia,57137.1
+South-east | VI,South-east,South-east,VI,45424.1
+South-west,Australian Marine Parks,South-west,,
+South-west | II,South-west,South-west,II,107255.7
+South-west | IV,South-west,South-west,IV,122699.8
+South-west | VI,South-west,South-west,VI,278415.3
+Temperate East,Australian Marine Parks,Temperate East,,
+Temperate East | II,Temperate East,Temperate East,II,59048.9
+Temperate East | IV,Temperate East,Temperate East,IV,273635.9
+Temperate East | VI,Temperate East,Temperate East,VI,50654.1

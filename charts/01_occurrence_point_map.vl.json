@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "ALA occurrence point map with high-contrast occurrence marks.",
+  "description": "ALA occurrence point map without in-map text annotations.",
   "width": "container",
-  "height": 430,
+  "height": 450,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -109,11 +109,11 @@
               "Australian sea lion"
             ],
             "range": [
-              "#2F6FB0",
-              "#008E8B",
-              "#4A9854",
-              "#D97706",
-              "#7B4FC7"
+              "#0072B2",
+              "#56B4E9",
+              "#009E73",
+              "#E69F00",
+              "#CC79A7"
             ]
           },
           "legend": {
@@ -148,15 +148,11 @@
       "fill": "#DFF1F4"
     },
     "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333",
       "gridColor": "#DCE7EA"
     },
     "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#334B58",
       "titleColor": "#102333"
     }

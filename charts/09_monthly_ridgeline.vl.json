@@ -1,0 +1,295 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Ridgeline of each species' monthly share of its own ALA records, with direct hover tooltips and no highlight selector.",
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/ala_monthly.csv"
+  },
+  "transform": [
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "record_count",
+          "as": "species_total"
+        }
+      ],
+      "groupby": [
+        "species"
+      ]
+    },
+    {
+      "calculate": "datum.record_count / datum.species_total",
+      "as": "share"
+    },
+    {
+      "calculate": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.month_num - 1]",
+      "as": "month_name"
+    },
+    {
+      "calculate": "indexof(['Australian sea lion','Grey nurse shark','Green turtle','Indo-Pacific bottlenose dolphin','Humpback whale'], datum.species)",
+      "as": "base"
+    },
+    {
+      "calculate": "datum.base + datum.share * 3.3",
+      "as": "ytop"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "share",
+          "as": "peak_share"
+        }
+      ],
+      "groupby": [
+        "species"
+      ]
+    },
+    {
+      "calculate": "datum.share === datum.peak_share ? 1 : 0",
+      "as": "is_peak"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "month_num",
+      "type": "quantitative",
+      "title": null,
+      "scale": {
+        "domain": [
+          1,
+          12
+        ],
+        "nice": false,
+        "padding": 0
+      },
+      "axis": {
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]",
+        "grid": false,
+        "labelFontSize": 10.5,
+        "labelPadding": 6,
+        "labelOverlap": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "fillOpacity": 0.9,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "y": {
+          "field": "ytop",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              5.05
+            ],
+            "nice": false
+          },
+          "axis": {
+            "values": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "labelExpr": "['Australian sea lion','Grey nurse shark','Green turtle','Bottlenose dolphin','Humpback whale'][datum.value]",
+            "labelLimit": 200,
+            "labelFontSize": 12,
+            "labelFontWeight": 700,
+            "labelPadding": 8,
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "title": null
+          }
+        },
+        "y2": {
+          "field": "base"
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Humpback whale",
+              "Indo-Pacific bottlenose dolphin",
+              "Green turtle",
+              "Grey nurse shark",
+              "Australian sea lion"
+            ],
+            "range": [
+              "#0072B2",
+              "#56B4E9",
+              "#009E73",
+              "#E69F00",
+              "#CC79A7"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "color": "#B8C9CF"
+      },
+      "encoding": {
+        "x": {
+          "datum": 1,
+          "type": "quantitative"
+        },
+        "x2": {
+          "datum": 12
+        },
+        "y": {
+          "field": "base",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              5.05
+            ],
+            "nice": false
+          }
+        },
+        "opacity": {
+          "value": 0.9
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 180,
+        "opacity": 0.001,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "field": "ytop",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              5.05
+            ],
+            "nice": false
+          }
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "month_name",
+            "title": "Month"
+          },
+          {
+            "field": "share",
+            "title": "Share of this species' records",
+            "format": ".1%"
+          },
+          {
+            "field": "record_count",
+            "title": "Monthly ALA records",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.is_peak === 1"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontWeight": 800,
+        "color": "#17313F",
+        "dy": -9,
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "y": {
+          "field": "ytop",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              5.05
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "month_name"
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "month_name",
+            "title": "Month"
+          },
+          {
+            "field": "share",
+            "title": "Share of this species' records",
+            "format": ".1%"
+          },
+          {
+            "field": "record_count",
+            "title": "Monthly ALA records",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

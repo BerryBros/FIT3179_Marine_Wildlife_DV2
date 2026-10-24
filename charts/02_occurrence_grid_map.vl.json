@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "Aggregated ALA occurrence concentration by two-degree cells.",
   "width": "container",
-  "height": 420,
+  "height": 390,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -43,7 +43,16 @@
     },
     {
       "data": {
-        "url": "data/ala_grid.csv"
+        "url": "data/ala_grid.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "record_count": "number",
+            "species_count": "number",
+            "grid_lon": "number",
+            "grid_lat": "number"
+          }
+        }
       },
       "mark": {
         "type": "circle",
@@ -70,6 +79,13 @@
               18,
               900
             ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolOpacity": 0.7,
+            "format": "~s",
+            "titleLimit": 260
           }
         },
         "color": {
@@ -82,6 +98,12 @@
               5
             ],
             "scheme": "tealblues"
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 180,
+            "tickCount": 5
           }
         },
         "tooltip": [
@@ -97,6 +119,68 @@
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "data/ala_grid.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "record_count": "number",
+            "species_count": "number",
+            "grid_lon": "number",
+            "grid_lat": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "window": [
+            {
+              "op": "rank",
+              "as": "rk"
+            }
+          ],
+          "sort": [
+            {
+              "field": "record_count",
+              "order": "descending"
+            }
+          ]
+        },
+        {
+          "filter": "datum.rk <= 3"
+        },
+        {
+          "calculate": "datum.rk === 1 ? 'Pilbara coast, WA' : datum.rk === 2 ? 'Central Qld coast' : 'Great Australian Bight'",
+          "as": "place"
+        },
+        {
+          "calculate": "[datum.place, format(datum.record_count, ',') + ' records']",
+          "as": "lbl"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 10.5,
+        "fontWeight": 700,
+        "color": "#17313F",
+        "lineHeight": 13,
+        "dy": -30
+      },
+      "encoding": {
+        "longitude": {
+          "field": "grid_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "grid_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl"
+        }
+      }
     }
   ],
   "config": {
@@ -105,21 +189,14 @@
       "fill": "#EAF6FB"
     },
     "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333",
       "gridColor": "#DCE7EA"
     },
     "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333"
     },
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
-    }
+    "header": {}
   }
 }

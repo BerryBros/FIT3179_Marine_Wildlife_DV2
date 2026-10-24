@@ -1,0 +1,13 @@
+group,status,count,total
+Protected sharks,Alive,20,36
+Protected sharks,Dead,15,36
+Protected sharks,Injured,1,36
+Seals and sea lions,Alive,18,35
+Seals and sea lions,Dead,17,35
+Seals and sea lions,Injured,0,35
+Marine turtles,Alive,19,20
+Marine turtles,Dead,1,20
+Marine turtles,Injured,0,20
+Whales and dolphins,Alive,5,12
+Whales and dolphins,Dead,7,12
+Whales and dolphins,Injured,0,12

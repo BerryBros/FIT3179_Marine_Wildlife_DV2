@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Life-status composition of reported protected-species interactions in AFMA-managed Commonwealth fisheries, Q1 2025.",
+  "width": "container",
+  "height": 300,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {
+    "url": "data/afma_protected_interactions_q1_2025.csv",
+    "format": {"type": "csv", "parse": {"count": "number", "total": "number"}}
+  },
+  "transform": [
+    {"calculate": "datum.total > 0 ? datum.count / datum.total : 0", "as": "share"}
+  ],
+  "mark": {"type": "bar", "cornerRadius": 2},
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "sort": ["Protected sharks", "Seals and sea lions", "Marine turtles", "Whales and dolphins"],
+      "title": null,
+      "axis": {"labelFontSize": 12, "labelLimit": 160, "ticks": false, "domain": false}
+    },
+    "x": {
+      "field": "share",
+      "type": "quantitative",
+      "stack": "normalize",
+      "title": "Share of reported interactions",
+      "axis": {"format": ".0%", "values": [0, 0.25, 0.5, 0.75, 1], "grid": true}
+    },
+    "color": {
+      "field": "status",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Alive", "Dead", "Injured"],
+        "range": ["#009E73", "#D55E00", "#E69F00"]
+      },
+      "legend": {"title": "Life status", "orient": "bottom", "direction": "horizontal"}
+    },
+    "order": {
+      "field": "status",
+      "sort": ["Alive", "Dead", "Injured"]
+    },
+    "tooltip": [
+      {"field": "group", "title": "Wildlife group"},
+      {"field": "status", "title": "Life status"},
+      {"field": "count", "title": "Reported interactions", "format": ",d"},
+      {"field": "share", "title": "Share", "format": ".1%"}
+    ]
+  },
+  "config": {"view": {"stroke": null, "fill": "transparent"}}
+}

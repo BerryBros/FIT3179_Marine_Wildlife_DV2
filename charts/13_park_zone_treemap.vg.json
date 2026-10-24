@@ -1,0 +1,332 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Treemap of Australian Marine Parks: area by park network (outer boxes) and IUCN protection category (coloured tiles).",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "height": 420,
+  "padding": {
+    "left": 2,
+    "right": 2,
+    "top": 36,
+    "bottom": 2
+  },
+  "signals": [
+    {
+      "name": "width",
+      "init": "isFinite(containerSize()[0]) ? containerSize()[0] : 900",
+      "on": [
+        {
+          "events": "window:resize",
+          "update": "isFinite(containerSize()[0]) ? containerSize()[0] : 900"
+        }
+      ]
+    },
+    {
+      "name": "hoverNetwork",
+      "value": null,
+      "on": [
+        {
+          "events": "@leaf:mouseover",
+          "update": "datum.network"
+        },
+        {
+          "events": "@leaf:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/park_zone_treemap_nodes.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "area_km2": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "area_km2",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "ratio": 1.2,
+          "round": true,
+          "paddingInner": 2,
+          "paddingOuter": 3,
+          "paddingTop": 20,
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 2"
+        }
+      ]
+    },
+    {
+      "name": "netTotals",
+      "source": "leaves",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "network"
+          ],
+          "fields": [
+            "area_km2"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "networks",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 1"
+        },
+        {
+          "type": "lookup",
+          "from": "netTotals",
+          "key": "network",
+          "fields": [
+            "network"
+          ],
+          "values": [
+            "total"
+          ],
+          "as": [
+            "net_total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "leavesT",
+      "source": "leaves",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "netTotals",
+          "key": "network",
+          "fields": [
+            "network"
+          ],
+          "values": [
+            "total"
+          ],
+          "as": [
+            "network_total"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.iucn_zone === 'Ia' ? 'Strict nature reserve' : datum.iucn_zone === 'II' ? 'National park' : datum.iucn_zone === 'IV' ? 'Habitat / species management' : datum.iucn_zone === 'VI' ? 'Sustainable multiple use' : datum.iucn_zone",
+          "as": "zone_label"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "zoneColour",
+      "type": "ordinal",
+      "domain": [
+        "Ia",
+        "II",
+        "IV",
+        "VI"
+      ],
+      "range": [
+        "#0072B2",
+        "#009E73",
+        "#56B4E9",
+        "#E69F00"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "name": "networkBox",
+      "from": {
+        "data": "networks"
+      },
+      "encode": {
+        "enter": {
+          "cornerRadius": {
+            "value": 4
+          },
+          "fill": {
+            "value": "#F2F7F8"
+          },
+          "stroke": {
+            "value": "#C5D6DB"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "strokeWidth": {
+            "signal": "hoverNetwork === datum.network ? 2 : 1"
+          },
+          "stroke": {
+            "signal": "hoverNetwork === datum.network ? '#0A5F5C' : '#C5D6DB'"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "leaf",
+      "from": {
+        "data": "leavesT"
+      },
+      "encode": {
+        "enter": {
+          "cornerRadius": {
+            "value": 2
+          },
+          "stroke": {
+            "value": "#FFFFFF"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "fill": {
+            "scale": "zoneColour",
+            "field": "iucn_zone"
+          },
+          "fillOpacity": {
+            "signal": "hoverNetwork && hoverNetwork !== datum.network ? 0.55 : 1"
+          },
+          "tooltip": {
+            "signal": "{'Network': datum.network, 'Management type': datum.zone_label + ' (' + datum.iucn_zone + ')', 'Area (km\u00b2)': format(datum.area_km2, ',.0f'), 'Share of this network': format(datum.area_km2 / datum.network_total, '.0%')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "networks"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x0 + 6"
+          },
+          "y": {
+            "signal": "datum.y0 + 14"
+          },
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 150 ? datum.network + '  \u00b7  ' + format(datum.net_total / 1000, ',.0f') + 'k km\u00b2' : (datum.x1 - datum.x0) > 60 ? datum.network : ''"
+          },
+          "limit": {
+            "signal": "datum.x1 - datum.x0 - 10"
+          },
+          "font": {
+            "value": "Manrope, sans-serif"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#17313F"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leavesT"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x0 + 7"
+          },
+          "y": {
+            "signal": "datum.y0 + 17"
+          },
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 44 && (datum.y1 - datum.y0) > 26 ? datum.iucn_zone : ''"
+          },
+          "font": {
+            "value": "Manrope, sans-serif"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "signal": "datum.iucn_zone === 'IV' || datum.iucn_zone === 'VI' ? '#10303D' : '#FFFFFF'"
+          }
+        }
+      }
+    }
+  ]
+}

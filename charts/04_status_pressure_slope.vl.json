@@ -1,0 +1,288 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Slope chart: each focal species' EPBC listing level (left) against the number of documented pressure categories (right).",
+  "width": "container",
+  "height": 350,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/status_vs_pressure.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "x": "number",
+        "y": "number",
+        "y_label": "number"
+      }
+    }
+  },
+  "encoding": {
+    "color": {
+      "field": "species",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Humpback whale",
+          "Indo-Pacific bottlenose dolphin",
+          "Green turtle",
+          "Grey nurse shark",
+          "Australian sea lion"
+        ],
+        "range": [
+          "#0072B2",
+          "#56B4E9",
+          "#009E73",
+          "#E69F00",
+          "#CC79A7"
+        ]
+      },
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3.5,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1.65,
+              2.65
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              1.28
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "detail": {
+          "field": "species"
+        },
+        "opacity": {
+          "value": 0.9
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "side",
+            "title": "Measure"
+          },
+          {
+            "field": "tip",
+            "title": "Value"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 170,
+        "opacity": 1,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1.65,
+              2.65
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              1.28
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "side",
+            "title": "Measure"
+          },
+          {
+            "field": "tip",
+            "title": "Value"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.side === 'EPBC listing' && datum.value_text !== ''"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -16,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#17313F"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1.65,
+              2.65
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y_label",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              1.28
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "value_text"
+        },
+        "color": {
+          "value": "#17313F"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.side === 'Documented pressures'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 16,
+        "fontSize": 13,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1.65,
+              2.65
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y_label",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.15,
+              1.28
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "value_text"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "t": "EPBC LEGAL STATUS"
+          },
+          {
+            "x": 1,
+            "t": "THREAT TYPES LINKED (OF 5)"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 800,
+        "color": "#5B7280",
+        "baseline": "bottom",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1.65,
+              2.65
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "datum": 1.2
+        },
+        "text": {
+          "field": "t"
+        },
+        "color": {
+          "value": "#5B7280"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

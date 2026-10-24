@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "BIA feature count heatmap.",
+  "description": "Species x behaviour matrix of mapped Biologically Important Area (km2, square-root colour scale).",
   "width": "container",
   "height": 300,
   "autosize": {
@@ -9,9 +9,50 @@
     "resize": true
   },
   "data": {
-    "url": "data/bia_summary.csv"
+    "url": "data/bia_park_overlap.csv"
   },
+  "transform": [
+    {
+      "filter": "datum.behaviour !== 'All behaviours'"
+    },
+    {
+      "impute": "bia_area_km2",
+      "key": "behaviour",
+      "groupby": [
+        "species"
+      ],
+      "keyvals": [
+        "Migration",
+        "Reproduction",
+        "Foraging",
+        "Resting"
+      ],
+      "value": null
+    },
+    {
+      "calculate": "isValid(datum.bia_area_km2) ? (datum.bia_area_km2 >= 1000 ? format(datum.bia_area_km2/1000, '.0f') + 'k' : format(datum.bia_area_km2, '.0f')) : 'N/A'",
+      "as": "cell_label"
+    }
+  ],
   "encoding": {
+    "y": {
+      "field": "species",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Humpback whale",
+        "Indo-Pacific bottlenose dolphin",
+        "Green turtle",
+        "Grey nurse shark",
+        "Australian sea lion"
+      ],
+      "axis": {
+        "labelLimit": 230,
+        "labelFontSize": 12,
+        "domain": false,
+        "ticks": false
+      }
+    },
     "x": {
       "field": "behaviour",
       "type": "nominal",
@@ -23,35 +64,60 @@
         "Resting"
       ],
       "axis": {
-        "labelAngle": 0
+        "orient": "top",
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "domain": false,
+        "ticks": false
       }
-    },
-    "y": {
-      "field": "species",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "Humpback whale",
-        "Indo-Pacific bottlenose dolphin",
-        "Green turtle",
-        "Grey nurse shark",
-        "Australian sea lion"
-      ]
     }
   },
   "layer": [
     {
       "mark": {
         "type": "rect",
-        "cornerRadius": 4
+        "cornerRadius": 4,
+        "fill": "#DCE8E6",
+        "stroke": "#F4F7F6",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "behaviour",
+            "title": "Behaviour"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "isValid(datum.bia_area_km2)"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 4,
+        "stroke": "#F4F7F6",
+        "strokeWidth": 2
       },
       "encoding": {
         "color": {
-          "field": "feature_count",
+          "field": "bia_area_km2",
           "type": "quantitative",
-          "title": "BIA polygons",
+          "title": "Mapped area (km\u00b2)",
           "scale": {
+            "type": "sqrt",
             "scheme": "tealblues"
+          },
+          "legend": {
+            "format": "~s",
+            "gradientLength": 200
           }
         },
         "tooltip": [
@@ -64,9 +130,13 @@
             "title": "Behaviour"
           },
           {
+            "field": "bia_area_km2",
+            "title": "Mapped area (km\u00b2)",
+            "format": ",.0f"
+          },
+          {
             "field": "feature_count",
-            "title": "BIA polygons",
-            "format": ","
+            "title": "Polygons drawn"
           }
         ]
       }
@@ -74,21 +144,25 @@
     {
       "mark": {
         "type": "text",
-        "fontSize": 12,
-        "fontWeight": 700
+        "fontWeight": 800,
+        "fontSize": 13
       },
       "encoding": {
         "text": {
-          "field": "feature_count",
-          "type": "quantitative",
-          "format": ".0f"
+          "field": "cell_label"
         },
         "color": {
-          "condition": {
-            "test": "datum.feature_count > 120",
-            "value": "white"
-          },
-          "value": "#17313A"
+          "condition": [
+            {
+              "test": "!isValid(datum.bia_area_km2)",
+              "value": "#74878B"
+            },
+            {
+              "test": "datum.bia_area_km2 > 120000",
+              "value": "#FFFFFF"
+            }
+          ],
+          "value": "#10303D"
         }
       }
     }
@@ -96,23 +170,6 @@
   "config": {
     "view": {
       "stroke": null
-    },
-    "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
-      "labelColor": "#334155",
-      "titleColor": "#0F172A",
-      "gridColor": "#E2E8F0"
-    },
-    "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
-      "labelColor": "#334155",
-      "titleColor": "#0F172A"
-    },
-    "header": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope"
     }
   }
 }

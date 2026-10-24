@@ -49,7 +49,7 @@ Open `http://localhost:8000` and hard-refresh with `Ctrl + Shift + R`.
 
 ## Chart inventory
 
-There are 12 active visualisations. Eight distinct advanced idiom types are used:
+There are 13 active visualisations (see notes/IDIOM-RATIONALE.md; this README predates the HD revision). Eight distinct advanced idiom types are used:
 point map, proportional-symbol map, bipartite network, categorical polygon map, heatmap, radial bar, bump chart, and layered overlay map.
 
 See `notes/IDIOM-RATIONALE.md` for the interview-ready What/Why/How rationale.

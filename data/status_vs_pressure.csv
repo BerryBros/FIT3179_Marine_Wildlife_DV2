@@ -1,0 +1,11 @@
+species,short,side,x,y,y_label,value_text,tip
+Humpback whale,Humpback whale,EPBC listing,0,0.035,0.0,Not EPBC threatened,Not EPBC threatened
+Humpback whale,Humpback whale,Documented pressures,1,0.8700000000000001,0.8700000000000001,Humpback whale · 4/5,4 of 5 pressure categories
+Indo-Pacific bottlenose dolphin,Bottlenose dolphin,EPBC listing,0,-0.035,0.0,,Not EPBC threatened
+Indo-Pacific bottlenose dolphin,Bottlenose dolphin,Documented pressures,1,1.0,1.0,Bottlenose dolphin · 5/5,5 of 5 pressure categories
+Green turtle,Green turtle,EPBC listing,0,0.3333333333333333,0.3333333333333333,Vulnerable,Vulnerable
+Green turtle,Green turtle,Documented pressures,1,0.8,0.8,Green turtle · 4/5,4 of 5 pressure categories
+Grey nurse shark,Grey nurse shark,EPBC listing,0,1.0,1.0,Critically Endangered,Critically Endangered
+Grey nurse shark,Grey nurse shark,Documented pressures,1,0.6,0.6,Grey nurse shark · 3/5,3 of 5 pressure categories
+Australian sea lion,Australian sea lion,EPBC listing,0,0.6666666666666666,0.6666666666666666,Endangered,Endangered
+Australian sea lion,Australian sea lion,Documented pressures,1,0.73,0.73,Australian sea lion · 4/5,4 of 5 pressure categories

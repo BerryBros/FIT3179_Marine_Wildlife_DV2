@@ -1,0 +1,48 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Reported protected-species interactions by broad marine wildlife group in AFMA-managed Commonwealth fisheries, Q1 2025.",
+  "width": "container",
+  "height": 300,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {
+    "url": "data/afma_protected_interactions_q1_2025.csv",
+    "format": {"type": "csv", "parse": {"count": "number", "total": "number"}}
+  },
+  "transform": [
+    {"aggregate": [{"op": "max", "field": "total", "as": "interactions"}], "groupby": ["group"]}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 3, "height": 22, "color": "#0072B2"},
+      "encoding": {
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+          "axis": {"labelFontSize": 12, "labelLimit": 160, "ticks": false, "domain": false}
+        },
+        "x": {
+          "field": "interactions",
+          "type": "quantitative",
+          "title": "Reported interactions",
+          "scale": {"domain": [0, 40]},
+          "axis": {"values": [0, 10, 20, 30, 40], "grid": true}
+        },
+        "tooltip": [
+          {"field": "group", "title": "Wildlife group"},
+          {"field": "interactions", "title": "Reported interactions", "format": ",d"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 7, "fontSize": 12, "fontWeight": 700, "color": "#173640"},
+      "encoding": {
+        "y": {"field": "group", "type": "nominal", "sort": "-x"},
+        "x": {"field": "interactions", "type": "quantitative"},
+        "text": {"field": "interactions", "type": "quantitative", "format": ",d"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null, "fill": "transparent"}}
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Marine Parks and BIA overlay with stronger contrast for selected BIA polygons.",
+  "description": "Marine parks and selected BIA overlay; selection summary is shown outside the map.",
   "width": "container",
-  "height": 500,
+  "height": 450,
   "autosize": {
     "type": "fit",
     "contains": "padding",
@@ -119,9 +119,9 @@
       ],
       "mark": {
         "type": "geoshape",
-        "fill": "#F28E2B",
+        "fill": "#E69F00",
         "fillOpacity": 0.3,
-        "stroke": "#C95E0C",
+        "stroke": "#B87500",
         "strokeWidth": 2.3
       },
       "encoding": {
@@ -148,15 +148,11 @@
       "fill": "#DDEFF3"
     },
     "axis": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333",
       "gridColor": "#DCE7EA"
     },
     "legend": {
-      "labelFont": "Manrope",
-      "titleFont": "Manrope",
       "labelColor": "#405363",
       "titleColor": "#102333"
     }
